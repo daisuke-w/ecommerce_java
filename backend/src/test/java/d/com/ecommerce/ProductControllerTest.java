@@ -1,12 +1,12 @@
 package d.com.ecommerce;
 
 import static org.mockito.BDDMockito.*;
-import static org.mockito.Mockito.*;
 
 import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -99,6 +99,6 @@ public class ProductControllerTest {
 	    mockMvc.perform(MockMvcRequestBuilders.delete("/api/products/1"))
 	            .andExpect(MockMvcResultMatchers.status().isNoContent());
 	
-	    verify(productService).deleteProduct(1L);
+	    Mockito.verify(productService).deleteProduct(1L);
 	}
 }
