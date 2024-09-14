@@ -19,7 +19,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import d.com.ecommerce.controller.ProductController;
-import d.com.ecommerce.model.Product;
+import d.com.ecommerce.entity.Product;
 import d.com.ecommerce.service.ProductService;
 
 @WebMvcTest(ProductController.class)

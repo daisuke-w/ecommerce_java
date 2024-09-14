@@ -1,4 +1,4 @@
-package d.com.ecommerce.model;
+package d.com.ecommerce.entity;
 
 import java.util.Collection;
 import java.util.Collections;

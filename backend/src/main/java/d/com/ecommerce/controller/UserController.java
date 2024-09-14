@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import d.com.ecommerce.model.User;
+import d.com.ecommerce.entity.User;
 import d.com.ecommerce.service.UserService;
 
 @RestController

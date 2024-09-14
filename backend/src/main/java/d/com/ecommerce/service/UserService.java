@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import d.com.ecommerce.model.User;
+import d.com.ecommerce.entity.User;
 import d.com.ecommerce.repository.UserRepository;
 
 @Service

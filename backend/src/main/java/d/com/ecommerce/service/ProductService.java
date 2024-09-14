@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import d.com.ecommerce.model.Product;
+import d.com.ecommerce.entity.Product;
 import d.com.ecommerce.repository.ProductRepository;
 
 @Service

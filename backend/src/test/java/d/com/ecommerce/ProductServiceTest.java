@@ -13,7 +13,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import d.com.ecommerce.model.Product;
+import d.com.ecommerce.entity.Product;
 import d.com.ecommerce.repository.ProductRepository;
 import d.com.ecommerce.service.ProductService;
 
