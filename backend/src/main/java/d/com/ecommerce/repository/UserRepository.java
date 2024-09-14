@@ -8,4 +8,5 @@ import d.com.ecommerce.entity.User;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 	Optional<User> findByUsername(String username);
+	User findByUserId(Long userId);
 }
