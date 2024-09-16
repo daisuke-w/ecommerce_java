@@ -13,6 +13,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import d.com.ecommerce.entity.CartItem;
@@ -76,7 +77,7 @@ public class CartServiceTest {
 		
 		cartService.addItemToCart(user, 1L, 2);
 		
-		verify(cartItemRepository, times(1)).save(argThat(cartItem -> {
+		Mockito.verify(cartItemRepository, times(1)).save(argThat(cartItem -> {
 			return cartItem.getUser().equals(user) &&
 				   cartItem.getProduct().equals(product) &&
 				   cartItem.getQuantity() == 2;
@@ -90,7 +91,7 @@ public class CartServiceTest {
 		
 		cartService.addItemToCart(user, 1L, 2);
 		
-		verify(cartItemRepository, times(1)).save(argThat(cartItem -> {
+		Mockito.verify(cartItemRepository, times(1)).save(argThat(cartItem -> {
 			return cartItem.getUser().equals(user) &&
 				   cartItem.getProduct().equals(product) &&
 				   cartItem.getQuantity() == 3; // Existing quantity 1 + added quantity 2
@@ -104,7 +105,7 @@ public class CartServiceTest {
 		
 		cartService.removeItemFromCart(user, 1L);
 		
-		verify(cartItemRepository, times(1)).delete(cartItem);
+		Mockito.verify(cartItemRepository, times(1)).delete(cartItem);
 	}
 	
 	@Test
@@ -114,7 +115,7 @@ public class CartServiceTest {
 		
 		cartService.updateItemQuantity(user, 1L, 5);
 		
-		verify(cartItemRepository, times(1)).save(argThat(cartItem -> {
+		Mockito.verify(cartItemRepository, times(1)).save(argThat(cartItem -> {
 			return cartItem.getUser().equals(user) &&
 				   cartItem.getProduct().equals(product) &&
 				   cartItem.getQuantity() == 5;
@@ -128,7 +129,7 @@ public class CartServiceTest {
 		
 		cartService.updateItemQuantity(user, 1L, 0);
 		
-		verify(cartItemRepository, times(1)).delete(cartItem);
+		Mockito.verify(cartItemRepository, times(1)).delete(cartItem);
 	}
 	
 	@Test
