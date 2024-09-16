@@ -4,8 +4,9 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import d.com.ecommerce.model.User;
+import d.com.ecommerce.entity.User;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 	Optional<User> findByUsername(String username);
+	User findByUserId(Long userId);
 }

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import d.com.ecommerce.model.Product;
+import d.com.ecommerce.entity.Product;
 import d.com.ecommerce.service.ProductService;
 
 @RestController

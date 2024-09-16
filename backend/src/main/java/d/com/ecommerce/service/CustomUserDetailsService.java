@@ -4,7 +4,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import d.com.ecommerce.model.User;
+import d.com.ecommerce.entity.User;
 import d.com.ecommerce.repository.UserRepository;
 
 public class CustomUserDetailsService implements UserDetailsService {
