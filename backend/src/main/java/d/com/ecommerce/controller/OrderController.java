@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 import d.com.ecommerce.entity.Order;
 import d.com.ecommerce.entity.User;
 import d.com.ecommerce.service.OrderService;
-import d.com.ecommerce.service.UserService;
 
 @RestController
 @RequestMapping("/orders")
@@ -19,9 +18,6 @@ public class OrderController {
 	
 	@Autowired
 	private OrderService orderService;
-	
-	@Autowired
-	private UserService userService;
 	
 	@PostMapping
 	public Order createOrder(@AuthenticationPrincipal User user) {
@@ -32,5 +28,4 @@ public class OrderController {
 	public Order getOrderById(@PathVariable Long orderId) {
 		return orderService.getOrderById(orderId);
 	}
-
 }
