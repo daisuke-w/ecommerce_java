@@ -10,3 +10,12 @@
   width: 200px;
   text-align: left;
 }
+
+.product-item a {
+  text-decoration: none;
+  color: blue;
+}
+
+.product-item a:hover {
+  text-decoration: underline;
+}
