@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from 'react-router-dom';
 
-import './ProductList.css';
+import "./ProductList.css";
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
@@ -26,6 +27,7 @@ const ProductList = () => {
                       <h2>{product.name}</h2>
                       <p>{product.description}</p>
                       <p>価格: {product.price}円</p>
+                      <Link to={`/product/${product.id}`}>詳細を見る</Link>
                   </div>
               ))
           ) : (
