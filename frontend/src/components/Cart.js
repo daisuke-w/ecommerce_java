@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import './Cart.css';
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -7,7 +8,6 @@ const Cart = () => {
   const userId = localStorage.getItem('userId');
 
   useEffect(() => {
-
     if (!userId) {
       console.error('ユーザーがログインしていません');
       return;
@@ -27,42 +27,42 @@ const Cart = () => {
 
     fetchCartItems();
   }, [userId]);
-};
 
-const calculateTotal = (items) => {
-  const total = items.reduce((acc, item) => acc + item.product.price * item.quantity, 0);
-  setTotalPrice(total);
-};
+  const calculateTotal = (items) => {
+    const total = items.reduce((acc, item) => acc + item.product.price * item.quantity, 0);
+    setTotalPrice(total);
+  };
 
-const handleRemove = async (productId) => {
-  try {
-      await axios.delete('/api/cart/remove', {
-          params: { userId, productId }
-      });
-      setCartItems(cartItems.filter(item => item.product.id !== productId));
-      calculateTotal(cartItems.filter(item => item.product.id !== productId));
-  } catch (error) {
-      console.error('商品の削除に失敗しました:', error);
-  }
-};
+  const handleRemove = async (productId) => {
+    try {
+        await axios.delete('/api/cart/remove', {
+            params: { userId, productId }
+        });
+        setCartItems(cartItems.filter(item => item.product.id !== productId));
+        calculateTotal(cartItems.filter(item => item.product.id !== productId));
+    } catch (error) {
+        console.error('商品の削除に失敗しました:', error);
+    }
+  };
 
-const handleQuantityChange = async (productId, newQuantity) => {
-  if (newQuantity <= 0) {
-      handleRemove(productId);
-      return;
-  }
-  try {
-      await axios.put('/api/cart/update', null, {
-          params: { userId, productId, quantity: newQuantity }
-      });
-      const updatedCartItems = cartItems.map(item =>
-          item.product.id === productId ? { ...item, quantity: newQuantity } : item
-      );
-      setCartItems(updatedCartItems);
-      calculateTotal(updatedCartItems);
-  } catch (error) {
-      console.error('数量の更新に失敗しました:', error);
-  }
+  const handleQuantityChange = async (productId, newQuantity) => {
+    if (newQuantity <= 0) {
+        handleRemove(productId);
+        return;
+    }
+    try {
+        await axios.put('/api/cart/update', null, {
+            params: { userId, productId, quantity: newQuantity }
+        });
+        const updatedCartItems = cartItems.map(item =>
+            item.product.id === productId ? { ...item, quantity: newQuantity } : item
+        );
+        setCartItems(updatedCartItems);
+        calculateTotal(updatedCartItems);
+    } catch (error) {
+        console.error('数量の更新に失敗しました:', error);
+    }
+  };
 
   return (
     <div className="cart">
