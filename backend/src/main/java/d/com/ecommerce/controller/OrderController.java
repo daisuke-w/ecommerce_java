@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import d.com.ecommerce.entity.Order;
+import d.com.ecommerce.entity.CustomerOrder;
 import d.com.ecommerce.entity.User;
 import d.com.ecommerce.service.OrderService;
 
@@ -20,12 +20,12 @@ public class OrderController {
 	private OrderService orderService;
 	
 	@PostMapping
-	public Order createOrder(@AuthenticationPrincipal User user) {
+	public CustomerOrder createOrder(@AuthenticationPrincipal User user) {
 		return orderService.createOrder(user);
 	}
 	
 	@GetMapping("/{orderId}")
-	public Order getOrderById(@PathVariable Long orderId) {
+	public CustomerOrder getOrderById(@PathVariable Long orderId) {
 		return orderService.getOrderById(orderId);
 	}
 }

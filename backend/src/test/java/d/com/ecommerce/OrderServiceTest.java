@@ -3,7 +3,6 @@ package d.com.ecommerce;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.BDDMockito.*;
-import static org.mockito.Mockito.*;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
@@ -17,7 +16,7 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import d.com.ecommerce.entity.CartItem;
-import d.com.ecommerce.entity.Order;
+import d.com.ecommerce.entity.CustomerOrder;
 import d.com.ecommerce.entity.Product;
 import d.com.ecommerce.entity.User;
 import d.com.ecommerce.repository.CartItemRepository;
@@ -65,26 +64,26 @@ public class OrderServiceTest {
 	@Test
 	public void testCreateOrder() {
 		given(cartItemRepository.findByUser(user)).willReturn(Arrays.asList(cartItem));
-		given(orderRepository.save(any(Order.class))).willAnswer(invocation -> invocation.getArgument(0));
+		given(orderRepository.save(any(CustomerOrder.class))).willAnswer(invocation -> invocation.getArgument(0));
 
-		Order order = orderService.createOrder(user);
+		CustomerOrder customerOrder = orderService.createOrder(user);
 
-		assertNotNull(order);
-		assertEquals(100.0, order.getTotalAmount());
-		Mockito.verify(cartItemRepository, times(1)).deleteAll(any());
+		assertNotNull(customerOrder);
+		assertEquals(100.0, customerOrder.getTotalAmount());
+		Mockito.verify(cartItemRepository, Mockito.times(1)).deleteAll(any());
 	}
 	
 	@Test
 	public void testGetOrderById() {
-	    Order order = new Order();
-	    order.setId(1L);
-	    order.setUser(user);
-	    order.setOrderDate(LocalDateTime.now());
-	    order.setTotalAmount(100.0);
+		CustomerOrder customerOrder = new CustomerOrder();
+		customerOrder.setId(1L);
+		customerOrder.setUser(user);
+		customerOrder.setOrderDate(LocalDateTime.now());
+		customerOrder.setTotalAmount(100.0);
 
-	    given(orderRepository.findById(1L)).willReturn(Optional.of(order));
+	    given(orderRepository.findById(1L)).willReturn(Optional.of(customerOrder));
 
-	    Order foundOrder = orderService.getOrderById(1L);
+	    CustomerOrder foundOrder = orderService.getOrderById(1L);
 
 	    assertNotNull(foundOrder);
 	    assertEquals(1L, foundOrder.getId());

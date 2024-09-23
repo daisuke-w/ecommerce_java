@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import d.com.ecommerce.entity.CartItem;
-import d.com.ecommerce.entity.Order;
+import d.com.ecommerce.entity.CustomerOrder;
 import d.com.ecommerce.entity.OrderItem;
 import d.com.ecommerce.entity.User;
 import d.com.ecommerce.repository.CartItemRepository;
@@ -25,36 +25,36 @@ public class OrderService {
 	private CartItemRepository cartItemRepository;
 	
 	@Transactional
-	public Order createOrder(User user) {
+	public CustomerOrder createOrder(User user) {
 		List<CartItem> cartItems = cartItemRepository.findByUser(user);
 		if (cartItems.isEmpty()) {
 			throw new RuntimeException("Cart is empty");
 		}
 		
-		Order order = new Order();
-		order.setUser(user);
-		order.setOrderDate(LocalDateTime.now());
-		order.setTotalAmount(calculateTotalAmount(cartItems));
+		CustomerOrder customerOrder = new CustomerOrder();
+		customerOrder.setUser(user);
+		customerOrder.setOrderDate(LocalDateTime.now());
+		customerOrder.setTotalAmount(calculateTotalAmount(cartItems));
 		
 		List<OrderItem> orderItems = cartItems.stream().map(cartItem -> {
 			OrderItem orderItem = new OrderItem();
-			orderItem.setOrder(order);
+			orderItem.setCustomerOrder(customerOrder);
 			orderItem.setProduct(cartItem.getProduct());
 			orderItem.setQuantity(cartItem.getQuantity());
 			orderItem.setPrice(cartItem.getProduct().getPrice() * cartItem.getQuantity());
 			return orderItem;
 		}).collect(Collectors.toList());
 		
-		order.setOrderItems(orderItems);
+		customerOrder.setOrderItems(orderItems);
 		
-		Order savedOrder = orderRepository.save(order);
+		CustomerOrder savedOrder = orderRepository.save(customerOrder);
 		
 		cartItemRepository.deleteAll(cartItems);
 		
 		return savedOrder;
 	}
 	
-	public Order getOrderById(Long orderId) {
+	public CustomerOrder getOrderById(Long orderId) {
 	    return orderRepository.findById(orderId)
 	            .orElseThrow(() -> new RuntimeException("Order not found"));
 	}

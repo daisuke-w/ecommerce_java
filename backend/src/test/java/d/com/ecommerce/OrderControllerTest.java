@@ -17,7 +17,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import d.com.ecommerce.controller.OrderController;
-import d.com.ecommerce.entity.Order;
+import d.com.ecommerce.entity.CustomerOrder;
 import d.com.ecommerce.entity.User;
 import d.com.ecommerce.service.OrderService;
 
@@ -46,13 +46,13 @@ public class OrderControllerTest {
 	
 	@Test
 	public void testCreateOrder() throws Exception {
-		Order order = new Order();
-		order.setId(1L);
-		order.setUser(user);
-		order.setOrderDate(LocalDateTime.now());
-		order.setTotalAmount(100.0);
+		CustomerOrder customerOrder = new CustomerOrder();
+		customerOrder.setId(1L);
+		customerOrder.setUser(user);
+		customerOrder.setOrderDate(LocalDateTime.now());
+		customerOrder.setTotalAmount(100.0);
 		
-		given(orderService.createOrder(user)).willReturn(order);
+		given(orderService.createOrder(user)).willReturn(customerOrder);
 		
 		mockMvc.perform(post("/orders"))
 			.andExpect(status().isOk());
@@ -60,13 +60,13 @@ public class OrderControllerTest {
 	
 	@Test
 	public void testGetOrderById() throws Exception {
-		Order order = new Order();
-		order.setId(1L);
-		order.setUser(user);
-		order.setOrderDate(LocalDateTime.now());
-		order.setTotalAmount(100.0);
+		CustomerOrder customerOrder = new CustomerOrder();
+		customerOrder.setId(1L);
+		customerOrder.setUser(user);
+		customerOrder.setOrderDate(LocalDateTime.now());
+		customerOrder.setTotalAmount(100.0);
 		
-		given(orderService.getOrderById(1L)).willReturn(order);
+		given(orderService.getOrderById(1L)).willReturn(customerOrder);
 		
 		mockMvc.perform(get("/orders/1"))
 			.andExpect(status().isOk());
