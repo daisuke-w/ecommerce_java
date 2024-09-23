@@ -1,6 +1,7 @@
 package d.com.ecommerce.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -28,25 +29,26 @@ public class CartController {
 
     @GetMapping
     public List<CartItem> getCartItems(@RequestParam Long userId) {
-        User user = userService.getUserByUserId(userId);
+        Optional<User> userOpt = userService.getUserById(userId);
+        User user = userOpt.orElseThrow(() -> new RuntimeException("User not found"));
         return cartService.getCartItems(user);
     }
 
     @PostMapping("/add")
     public void addItemToCart(@RequestParam Long userId, @RequestParam Long productId, @RequestParam int quantity) {
-        User user = userService.getUserByUserId(userId);
+    	Optional<User> user = userService.getUserById(userId);
         cartService.addItemToCart(user, productId, quantity);
     }
 
     @DeleteMapping("/remove")
     public void removeItemFromCart(@RequestParam Long userId, @RequestParam Long productId) {
-        User user = userService.getUserByUserId(userId);
+    	Optional<User> user = userService.getUserById(userId);
         cartService.removeItemFromCart(user, productId);
     }
 
     @PutMapping("/update")
     public void updateItemQuantity(@RequestParam Long userId, @RequestParam Long productId, @RequestParam int quantity) {
-        User user = userService.getUserByUserId(userId);
+    	Optional<User> user = userService.getUserById(userId);
         cartService.updateItemQuantity(user, productId, quantity);
     }
 }

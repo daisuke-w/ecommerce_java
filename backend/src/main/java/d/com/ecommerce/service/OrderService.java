@@ -2,6 +2,7 @@ package d.com.ecommerce.service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,9 @@ public class OrderService {
 	private CartItemRepository cartItemRepository;
 	
 	@Transactional
-	public CustomerOrder createOrder(User user) {
+	public CustomerOrder createOrder(Optional<User> userOpt) {
+		User user = userOpt.orElseThrow(() -> new RuntimeException("User not found"));
+
 		List<CartItem> cartItems = cartItemRepository.findByUser(user);
 		if (cartItems.isEmpty()) {
 			throw new RuntimeException("Cart is empty");

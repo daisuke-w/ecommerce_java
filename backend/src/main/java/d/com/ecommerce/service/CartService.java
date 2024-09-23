@@ -1,6 +1,7 @@
 package d.com.ecommerce.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +24,9 @@ public class CartService {
         return cartItemRepository.findByUser(user);
     }
 
-    public void addItemToCart(User user, Long productId, int quantity) {
+    public void addItemToCart(Optional<User> userOpt, Long productId, int quantity) {
+        User user = userOpt.orElseThrow(() -> new RuntimeException("User not found"));
+
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new RuntimeException("Product not found"));
 
@@ -36,7 +39,9 @@ public class CartService {
         cartItemRepository.save(cartItem);
     }
 
-    public void removeItemFromCart(User user, Long productId) {
+    public void removeItemFromCart(Optional<User> userOpt, Long productId) {
+        User user = userOpt.orElseThrow(() -> new RuntimeException("User not found"));
+
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new RuntimeException("Product not found"));
 
@@ -46,7 +51,9 @@ public class CartService {
         cartItemRepository.delete(cartItem);
     }
 
-    public void updateItemQuantity(User user, Long productId, int quantity) {
+    public void updateItemQuantity(Optional<User> userOpt, Long productId, int quantity) {
+        User user = userOpt.orElseThrow(() -> new RuntimeException("User not found"));
+
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new RuntimeException("Product not found"));
 

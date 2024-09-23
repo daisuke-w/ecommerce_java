@@ -1,5 +1,7 @@
 package d.com.ecommerce.controller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +22,7 @@ public class OrderController {
 	private OrderService orderService;
 	
 	@PostMapping
-	public CustomerOrder createOrder(@AuthenticationPrincipal User user) {
+	public CustomerOrder createOrder(@AuthenticationPrincipal Optional<User> user) {
 		return orderService.createOrder(user);
 	}
 	
