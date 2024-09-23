@@ -3,6 +3,7 @@ package d.com.ecommerce;
 import static org.mockito.BDDMockito.*;
 
 import java.util.Arrays;
+import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -65,7 +66,7 @@ public class CartControllerTest {
 
     @Test
     public void testGetCartItems() throws Exception {
-        given(userService.getUserByUserId(1L)).willReturn(user);
+        given(userService.getUserById(1L)).willReturn(Optional.of(user));
         given(cartService.getCartItems(user)).willReturn(Arrays.asList(cartItem));
 
         mockMvc.perform(MockMvcRequestBuilders.get("/api/cart")

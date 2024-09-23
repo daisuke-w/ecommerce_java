@@ -5,6 +5,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -52,7 +53,7 @@ public class OrderControllerTest {
 		customerOrder.setOrderDate(LocalDateTime.now());
 		customerOrder.setTotalAmount(100.0);
 		
-		given(orderService.createOrder(user)).willReturn(customerOrder);
+		given(orderService.createOrder(Optional.of(user))).willReturn(customerOrder);
 		
 		mockMvc.perform(post("/orders"))
 			.andExpect(status().isOk());
