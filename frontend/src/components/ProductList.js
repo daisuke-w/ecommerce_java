@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import axios from '../services/axiosConfig';
 import { Link } from 'react-router-dom';
 
 import "./ProductList.css";
@@ -8,7 +8,7 @@ const ProductList = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    axios.get(`/api/products`)
+    axios.get(`/products`)
         .then(response => {
           setProducts(response.data);
         })

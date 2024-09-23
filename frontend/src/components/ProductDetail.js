@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
+import axios from '../services/axiosConfig';
 
 const ProductDetail = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
 
   useEffect(() => {
-    axios.get(`/api/products/${id}`)
+    axios.get(`/products/${id}`)
         .then(response => {
           setProduct(response.data);
         })
