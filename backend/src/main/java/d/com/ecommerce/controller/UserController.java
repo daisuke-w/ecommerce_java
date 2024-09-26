@@ -58,26 +58,28 @@ public class UserController {
 	}
 
 	@PostMapping("/login")
-	public ResponseEntity<String> loginUser(@RequestBody Map<String, String> userMap) {
+	public ResponseEntity<Map<String, Object>> loginUser(@RequestBody Map<String, String> userMap) {
 
 		String username = userMap.get("username");
 		String password = userMap.get("password");
+		Map<String, Object> response = new HashMap<>();
 
 		if (username == null || password == null) {
-			return ResponseEntity.badRequest().body("Username and password must be provided");
+			response.put("message", "Username and password must be provided");
+			return ResponseEntity.badRequest().body(response);
 		}
 
 		Optional<User> user = userService.getUserByUsername(username);
 		if (user.isPresent() && passwordEncoder.matches(password, user.get().getPassword())) {
 			String token = generateJwtToken(user.get());
 			
-			Map<String, Object> response = new HashMap<>();
 			response.put("message", "Login successful");
 			response.put("token", token);
 			
-			return ResponseEntity.ok("Login successful");
+			return ResponseEntity.ok(response);
 		} else {
-			return ResponseEntity.badRequest().body("Invalid username or password");
+			response.put("message", "Invalid username or password");
+			return ResponseEntity.badRequest().body(response);
 		}
 	}
 	
