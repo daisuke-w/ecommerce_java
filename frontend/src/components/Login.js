@@ -14,8 +14,14 @@ const Login = () => {
     try {
       const response = await axios.post('/users/login', { username, password });
 
-      localStorage.setItem('token', response.data.token);
-      navigate('/');
+      const token = response.data.token;
+
+      if (token) {
+        localStorage.setItem('token', response.data.token);
+        navigate('/');
+      } else {
+        setError('ログインに失敗しました。トークンが取得できませんでした。');
+      }
     } catch (err) {
       setError('ログインに失敗しました。ユーザー名またはパスワードが正しくありません。');
     }
