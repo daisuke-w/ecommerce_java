@@ -6,15 +6,20 @@ import "./ProductList.css";
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
+  const [error, setError] = useState('');
 
   useEffect(() => {
-    axios.get(`/products`)
-        .then(response => {
-          setProducts(response.data);
-        })
-        .catch(error => {
-          console.error('Error fetching products:', error);
-        });
+    const fetchProducts = async () => {
+    try {
+      const response = await axios.get('/products');
+      setProducts(response.data);
+    } catch (error) {
+      console.error('Error fetching products:', error);
+      setError('商品を取得できませんでした。');
+    }
+    };
+  
+    fetchProducts();
   }, []);
 
   return (
@@ -31,7 +36,7 @@ const ProductList = () => {
                   </div>
               ))
           ) : (
-              <p>商品がありません。</p>
+            error && <p>{error}</p>
           )}
       </div>
     </div>
