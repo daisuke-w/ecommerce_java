@@ -15,7 +15,7 @@ import lombok.Data;
 
 @Entity
 @Data
-public class Order {
+public class CustomerOrder {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,6 +29,6 @@ public class Order {
 	
 	private Double totalAmount;
 	
-	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "customerOrder", cascade = CascadeType.ALL)
 	private List<OrderItem> orderItems;
 }

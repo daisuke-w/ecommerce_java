@@ -3,7 +3,6 @@ package d.com.ecommerce;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.BDDMockito.*;
-import static org.mockito.Mockito.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -75,9 +74,9 @@ public class CartServiceTest {
 		given(productRepository.findById(1L)).willReturn(Optional.of(product));
 		given(cartItemRepository.findByUserAndProduct(user, product)).willReturn(Optional.empty());
 		
-		cartService.addItemToCart(user, 1L, 2);
+		cartService.addItemToCart(Optional.of(user), 1L, 2);
 		
-		Mockito.verify(cartItemRepository, times(1)).save(argThat(cartItem -> {
+		Mockito.verify(cartItemRepository, Mockito.times(1)).save(argThat(cartItem -> {
 			return cartItem.getUser().equals(user) &&
 				   cartItem.getProduct().equals(product) &&
 				   cartItem.getQuantity() == 2;
@@ -89,12 +88,12 @@ public class CartServiceTest {
 		given(productRepository.findById(1L)).willReturn(Optional.of(product));
 		given(cartItemRepository.findByUserAndProduct(user, product)).willReturn(Optional.of(cartItem));
 		
-		cartService.addItemToCart(user, 1L, 2);
+		cartService.addItemToCart(Optional.of(user), 1L, 2);
 		
-		Mockito.verify(cartItemRepository, times(1)).save(argThat(cartItem -> {
+		Mockito.verify(cartItemRepository, Mockito.times(1)).save(argThat(cartItem -> {
 			return cartItem.getUser().equals(user) &&
 				   cartItem.getProduct().equals(product) &&
-				   cartItem.getQuantity() == 3; // Existing quantity 1 + added quantity 2
+				   cartItem.getQuantity() == 3;
 		}));
 	}
 	
@@ -103,9 +102,9 @@ public class CartServiceTest {
 		given(productRepository.findById(1L)).willReturn(Optional.of(product));
 		given(cartItemRepository.findByUserAndProduct(user, product)).willReturn(Optional.of(cartItem));
 		
-		cartService.removeItemFromCart(user, 1L);
+		cartService.removeItemFromCart(Optional.of(user), 1L);
 		
-		Mockito.verify(cartItemRepository, times(1)).delete(cartItem);
+		Mockito.verify(cartItemRepository, Mockito.times(1)).delete(cartItem);
 	}
 	
 	@Test
@@ -113,9 +112,9 @@ public class CartServiceTest {
 		given(productRepository.findById(1L)).willReturn(Optional.of(product));
 		given(cartItemRepository.findByUserAndProduct(user, product)).willReturn(Optional.of(cartItem));
 		
-		cartService.updateItemQuantity(user, 1L, 5);
+		cartService.updateItemQuantity(Optional.of(user), 1L, 5);
 		
-		Mockito.verify(cartItemRepository, times(1)).save(argThat(cartItem -> {
+		Mockito.verify(cartItemRepository, Mockito.times(1)).save(argThat(cartItem -> {
 			return cartItem.getUser().equals(user) &&
 				   cartItem.getProduct().equals(product) &&
 				   cartItem.getQuantity() == 5;
@@ -127,9 +126,9 @@ public class CartServiceTest {
 		given(productRepository.findById(1L)).willReturn(Optional.of(product));
 		given(cartItemRepository.findByUserAndProduct(user, product)).willReturn(Optional.of(cartItem));
 		
-		cartService.updateItemQuantity(user, 1L, 0);
+		cartService.updateItemQuantity(Optional.of(user), 1L, 0);
 		
-		Mockito.verify(cartItemRepository, times(1)).delete(cartItem);
+		Mockito.verify(cartItemRepository, Mockito.times(1)).delete(cartItem);
 	}
 	
 	@Test
@@ -137,7 +136,7 @@ public class CartServiceTest {
 		given(productRepository.findById(1L)).willReturn(Optional.empty());
 		
 		assertThrows(RuntimeException.class, () -> {
-			cartService.addItemToCart(user, 1L, 2);
+			cartService.addItemToCart(Optional.of(user), 1L, 2);
 		});
 	}
 	
@@ -146,7 +145,7 @@ public class CartServiceTest {
 		given(productRepository.findById(1L)).willReturn(Optional.empty());
 		
 		assertThrows(RuntimeException.class, () -> {
-			cartService.removeItemFromCart(user, 1L);
+			cartService.removeItemFromCart(Optional.of(user), 1L);
 		});
 	}
 	
@@ -155,7 +154,7 @@ public class CartServiceTest {
 		given(productRepository.findById(1L)).willReturn(Optional.empty());
 		
 		assertThrows(RuntimeException.class, () -> {
-			cartService.updateItemQuantity(user, 1L, 5);
+			cartService.updateItemQuantity(Optional.of(user), 1L, 5);
 		});
 	}
 	
@@ -165,7 +164,7 @@ public class CartServiceTest {
 		given(cartItemRepository.findByUserAndProduct(user, product)).willReturn(Optional.empty());
 		
 		assertThrows(RuntimeException.class, () -> {
-			cartService.updateItemQuantity(user, 1L, 5);
+			cartService.updateItemQuantity(Optional.of(user), 1L, 5);
 		});
 	}
 }

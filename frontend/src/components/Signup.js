@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import axios from '../services/axiosConfig';
 import { useNavigate } from 'react-router-dom';
 
 const Signup = () => {
@@ -12,7 +12,7 @@ const Signup = () => {
     e.preventDefault();
 
     try {
-      await axios.post('/api/auth/signup', { username, password });
+      await axios.post('/users/register', { username, password });
 
       // サインアップ成功後にログインページに遷移
       navigate('/login');

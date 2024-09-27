@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import axios from '../services/axiosConfig';
 import './Cart.css';
 
 const Cart = () => {
@@ -15,7 +15,7 @@ const Cart = () => {
 
     const fetchCartItems = async () => {
       try {
-        const response = await axios.get(`/api/cart`, {
+        const response = await axios.get(`/cart`, {
           params: { userId }
         });
         setCartItems(response.data);
@@ -35,7 +35,7 @@ const Cart = () => {
 
   const handleRemove = async (productId) => {
     try {
-        await axios.delete('/api/cart/remove', {
+        await axios.delete('/cart/remove', {
             params: { userId, productId }
         });
         setCartItems(cartItems.filter(item => item.product.id !== productId));
@@ -51,7 +51,7 @@ const Cart = () => {
         return;
     }
     try {
-        await axios.put('/api/cart/update', null, {
+        await axios.put('/cart/update', null, {
             params: { userId, productId, quantity: newQuantity }
         });
         const updatedCartItems = cartItems.map(item =>
