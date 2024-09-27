@@ -1,5 +1,6 @@
 package d.com.ecommerce.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -10,30 +11,35 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+	
+	@Autowired
+	private JwtAuthenticationFilter jwtAuthenticationFilter;
 
-    @Bean
-    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-    	http
+	@Bean
+	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+		http
 			.cors(Customizer.withDefaults())
+			.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
 			.authorizeHttpRequests(authorize -> authorize
-    			.requestMatchers("/api/users/register", "/api/users/login").permitAll()
-    			.anyRequest().authenticated()
-    		)
-    		.csrf(csrf -> csrf.disable());
-    	return http.build();
+				.requestMatchers("/api/users/register", "/api/users/login").permitAll()
+				.anyRequest().authenticated()
+			)
+			.csrf(csrf -> csrf.disable());
+		return http.build();
 	}
 
-    @Bean
-    PasswordEncoder passwordEncoder() {
-    	return new BCryptPasswordEncoder();
-    }
+	@Bean
+	PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
 
-    @Bean
-    AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
-    	return authenticationConfiguration.getAuthenticationManager();
-    }
+	@Bean
+	AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+		return authenticationConfiguration.getAuthenticationManager();
+	}
 }

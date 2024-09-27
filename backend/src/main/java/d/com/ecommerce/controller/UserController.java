@@ -1,6 +1,5 @@
 package d.com.ecommerce.controller;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -8,7 +7,6 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,10 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import d.com.ecommerce.config.JwtUtils;
 import d.com.ecommerce.entity.User;
 import d.com.ecommerce.service.UserService;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 
 @RestController
 @RequestMapping("/api/users")
@@ -33,11 +30,8 @@ public class UserController {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
-	@Value("${jwt.secret}")
-	private String jwtSecret;
-	
-	@Value("${jwt.expiration}")
-	private long jwtExpirationMs;
+	@Autowired
+	private JwtUtils jwtUtils;
 	
 	@PostMapping("/register")
 	public ResponseEntity<String> register(@RequestBody Map<String, String> userMap) {
@@ -71,25 +65,16 @@ public class UserController {
 
 		Optional<User> user = userService.getUserByUsername(username);
 		if (user.isPresent() && passwordEncoder.matches(password, user.get().getPassword())) {
-			String token = generateJwtToken(user.get());
+			String token = jwtUtils.generateJwtToken(user.get());
 			
 			response.put("message", "Login successful");
 			response.put("token", token);
+			logger.info("token:", token);
 			
 			return ResponseEntity.ok(response);
 		} else {
 			response.put("message", "Invalid username or password");
 			return ResponseEntity.badRequest().body(response);
 		}
-	}
-	
-	private String generateJwtToken(User user) {
-		// JWT の構成情報を設定
-		return Jwts.builder()
-			.setSubject(user.getUsername())
-			.setIssuedAt(new Date())
-			.setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
-			.signWith(SignatureAlgorithm.HS512, jwtSecret)
-			.compact();
 	}
 }
