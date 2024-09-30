@@ -25,6 +25,7 @@ const ProductList = () => {
   return (
     <div>
       <h1>商品一覧</h1>
+      {error && <p className="error">{error}</p>}
       <div className="product-list">
           {products.length > 0 ? (
               products.map(product => (
@@ -36,7 +37,7 @@ const ProductList = () => {
                   </div>
               ))
           ) : (
-            error && <p>{error}</p>
+            <p>商品がありません。</p>
           )}
       </div>
     </div>
