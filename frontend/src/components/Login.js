@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import axios from '../services/axiosConfig';
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from '../context/AuthContext';
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const { login } = useContext(AuthContext);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -17,7 +19,7 @@ const Login = () => {
       const token = response.data.token;
 
       if (token) {
-        localStorage.setItem('token', response.data.token);
+        login(token);
         navigate('/');
       } else {
         setError('ログインに失敗しました。トークンが取得できませんでした。');
