@@ -85,7 +85,7 @@ const Cart = () => {
                                         onChange={(e) => handleQuantityChange(item.product.id, parseInt(e.target.value))}
                                     />
                                 </span>
-                                <button onClick={() => handleRemove(item.product.id)}>削除</button>
+                                <button onClick={() => handleRemove(item.product.id)} className="delete-button">削除</button>
                             </div>
                         </li>
                     ))}

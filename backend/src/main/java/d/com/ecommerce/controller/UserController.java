@@ -69,7 +69,6 @@ public class UserController {
 			
 			response.put("message", "Login successful");
 			response.put("token", token);
-			logger.info("token:", token);
 			
 			return ResponseEntity.ok(response);
 		} else {
