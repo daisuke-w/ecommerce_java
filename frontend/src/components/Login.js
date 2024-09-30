@@ -30,29 +30,29 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <h2>ログイン</h2>
+    <div className="form-container">
+      <h2 className="sign-title">ログイン</h2>
       {error && <p>{error}</p>}
-      <form onSubmit={handleLogin}>
-        <div>
-          <label>ユーザー名</label>
+      <form onSubmit={handleLogin} className="sign-form">
+        <div className="input-item">
           <input 
             type="text" 
             value={username} 
             onChange={(e) => setUsername(e.target.value)} 
+            placeholder="ユーザー名" 
             required 
           />
         </div>
-        <div>
-          <label>パスワード</label>
+        <div className="input-item">
           <input 
             type="password" 
             value={password} 
             onChange={(e) => setPassword(e.target.value)} 
+            placeholder="パスワード" 
             required 
           />
         </div>
-        <button type="submit">ログイン</button>
+        <button type="submit" className="submit-button">ログイン</button>
       </form>
     </div>
   );
