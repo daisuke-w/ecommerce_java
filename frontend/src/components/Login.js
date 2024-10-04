@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import axios from '../services/axiosConfig';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { AuthContext } from '../context/AuthContext';
 
 const Login = () => {
@@ -54,6 +54,7 @@ const Login = () => {
         </div>
         <button type="submit" className="submit-button">ログイン</button>
       </form>
+      <p>アカウントをお持ちでない場合は<Link to="/signup">こちら</Link></p>
     </div>
   );
 };
