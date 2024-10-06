@@ -7,14 +7,13 @@ import Cart from './components/Cart';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import ProtectedRoute from './components/ProtectedRoute';
+import Header from './components/Header'; 
 
 function App() {
   return (
     <Router>
       <div className="App">
-        <header className="App-header">
-          <h1>ECサイト</h1>
-        </header>
+        <Header />
         <Routes>
           <Route path="/" element={<ProtectedRoute><ProductList /></ProtectedRoute>} />
           <Route path="/product/:id" element={<ProtectedRoute><ProductDetail /></ProtectedRoute>} />
