@@ -66,9 +66,11 @@ public class UserController {
 		Optional<User> user = userService.getUserByUsername(username);
 		if (user.isPresent() && passwordEncoder.matches(password, user.get().getPassword())) {
 			String token = jwtUtils.generateJwtToken(user.get());
+			Long userId = user.get().getId();
 			
 			response.put("message", "Login successful");
 			response.put("token", token);
+			response.put("userId", userId);
 			
 			return ResponseEntity.ok(response);
 		} else {
