@@ -16,7 +16,7 @@ const Login = () => {
     try {
       const response = await axios.post('/users/login', { username, password });
 
-      const { token, userId } = response.data.token;
+      const { token, userId } = response.data;
 
       if (token) {
         login(token, userId);
