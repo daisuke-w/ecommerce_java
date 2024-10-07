@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { Link } from 'react-router-dom';
 import { AuthContext } from "../context/AuthContext";
 import Logout from "./Logout";
 
@@ -7,10 +8,17 @@ const Header = () => {
 
   return (
     <header className="App-header">
-      <h1>ECサイト</h1>
-      <nav>
-        {auth && <Logout />}
-      </nav>
+      <div>
+        <h1>ECサイト</h1>
+      </div>
+      <div>
+        {auth && (
+          <>
+            <Link to="/cart" className="cart-button">カート</Link>
+            <Logout />
+          </>
+        )}
+      </div>
     </header>
   );
 };
