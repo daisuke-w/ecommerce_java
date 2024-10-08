@@ -8,7 +8,7 @@ import "./ProductList.css";
 const ProductList = () => {
   const [products, setProducts] = useState([]);
   const [error, setError] = useState('');
-  const { auth, userId } = useContext(AuthContext);
+  const { auth } = useContext(AuthContext);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -27,7 +27,6 @@ const ProductList = () => {
   const addToCart = async (productId) => {
     try {
       await axios.post('/cart/add', {
-        userId: userId,
         productId: productId,
         quantity: 1
       });
