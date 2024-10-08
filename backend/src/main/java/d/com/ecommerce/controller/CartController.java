@@ -31,8 +31,9 @@ public class CartController {
     private UserService userService;
 
     @GetMapping
-    public List<CartItem> getCartItems(@RequestParam Long userId) {
-        Optional<User> userOpt = userService.getUserById(userId);
+    public List<CartItem> getCartItems(Principal principal) {
+    	String username = principal.getName();
+        Optional<User> userOpt = userService.getUserByUsername(username);
         User user = userOpt.orElseThrow(() -> new RuntimeException("User not found"));
         return cartService.getCartItems(user);
     }
@@ -40,7 +41,8 @@ public class CartController {
     @PostMapping("/add")
     public void addItemToCart(@RequestBody CartRequest cartRequest, Principal principal) {
     	String username = principal.getName();
-    	Optional<User> user = userService.getUserByUsername(username);
+    	Optional<User> userOpt = userService.getUserByUsername(username);
+    	User user = userOpt.orElseThrow(() -> new RuntimeException("User not found"));
     	
     	Long productId = cartRequest.getProductId();
     	int quantity = cartRequest.getQuantity();
@@ -48,14 +50,18 @@ public class CartController {
     }
 
     @DeleteMapping("/remove")
-    public void removeItemFromCart(@RequestParam Long userId, @RequestParam Long productId) {
-    	Optional<User> user = userService.getUserById(userId);
+    public void removeItemFromCart(@RequestParam Long productId, Principal principal) {
+    	String username = principal.getName();
+    	Optional<User> userOpt = userService.getUserByUsername(username);
+    	User user = userOpt.orElseThrow(() -> new RuntimeException("User not found"));
         cartService.removeItemFromCart(user, productId);
     }
 
     @PutMapping("/update")
-    public void updateItemQuantity(@RequestParam Long userId, @RequestParam Long productId, @RequestParam int quantity) {
-    	Optional<User> user = userService.getUserById(userId);
+    public void updateItemQuantity(@RequestParam Long productId, @RequestParam int quantity, Principal principal) {
+    	String username = principal.getName();
+    	Optional<User> userOpt = userService.getUserByUsername(username);
+    	User user = userOpt.orElseThrow(() -> new RuntimeException("User not found"));
         cartService.updateItemQuantity(user, productId, quantity);
     }
 }
