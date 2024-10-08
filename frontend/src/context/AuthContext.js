@@ -21,12 +21,14 @@ export const AuthProvider = ({ children }) => {
     localStorage.setItem('token', token);
     localStorage.setItem('userId', userId);
     setAuth(true);
+    setUserId(Number(userId));
   };
 
   const logout = () => {
     localStorage.removeItem(`token`);
-    localStorage.removeItem('userId', userId);
+    localStorage.removeItem('userId');
     setAuth(false);
+    setUserId(null);
   };
 
   return (
