@@ -15,9 +15,7 @@ const Cart = () => {
 
     const fetchCartItems = async () => {
       try {
-        const response = await axios.get(`/cart`, {
-          params: { userId }
-        });
+        const response = await axios.get(`/cart`);
         setCartItems(response.data);
         calculateTotal(response.data);
       } catch (error) {
@@ -36,7 +34,7 @@ const Cart = () => {
   const handleRemove = async (productId) => {
     try {
         await axios.delete('/cart/remove', {
-            params: { userId, productId }
+            params: { productId }
         });
         setCartItems(cartItems.filter(item => item.product.id !== productId));
         calculateTotal(cartItems.filter(item => item.product.id !== productId));
@@ -52,7 +50,7 @@ const Cart = () => {
     }
     try {
         await axios.put('/cart/update', null, {
-            params: { userId, productId, quantity: newQuantity }
+            params: { productId, quantity: newQuantity }
         });
         const updatedCartItems = cartItems.map(item =>
             item.product.id === productId ? { ...item, quantity: newQuantity } : item
