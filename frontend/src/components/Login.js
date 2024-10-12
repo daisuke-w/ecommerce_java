@@ -16,10 +16,10 @@ const Login = () => {
     try {
       const response = await axios.post('/users/login', { username, password });
 
-      const token = response.data.token;
+      const { token, userId } = response.data;
 
       if (token) {
-        login(token);
+        login(token, userId);
         navigate('/');
       } else {
         setError('ログインに失敗しました。トークンが取得できませんでした。');
