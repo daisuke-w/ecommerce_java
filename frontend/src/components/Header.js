@@ -9,7 +9,7 @@ const Header = () => {
   return (
     <header className="App-header">
       <div>
-        <h1>ECサイト</h1>
+        <h1><Link to="/" className="header-title">ECサイト</Link></h1>
       </div>
       <div>
         {auth && (
