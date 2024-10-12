@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import axios from '../services/axiosConfig';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
+import { addToCart } from '../services/AddToCart';
 
 import "./ProductList.css";
 
@@ -23,19 +24,6 @@ const ProductList = () => {
   
     fetchProducts();
   }, []);
-
-  const addToCart = async (productId) => {
-    try {
-      await axios.post('/cart/add', {
-        productId: productId,
-        quantity: 1
-      });
-      alert('カートに追加しました！');
-    } catch (error) {
-      console.error('Error adding to cart:', error);
-      alert('カートに追加できませんでした。');
-    }
-  };
 
   return (
     <div>
