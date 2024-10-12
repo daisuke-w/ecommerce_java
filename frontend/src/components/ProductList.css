@@ -14,6 +14,7 @@
 .product-item a {
   text-decoration: none;
   color: blue;
+  display: block;
 }
 
 .product-item a:hover {

@@ -28,3 +28,16 @@
 .delete-button:hover {
   background-color: #ff0000;
 }
+
+.add-to-cart-button {
+  background-color: #ff991b;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.add-to-cart-button:hover {
+  background-color: #935810;
+}
+
