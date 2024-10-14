@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useParams } from 'react-router-dom';
-import axios from '../services/axiosConfig';
-import { AuthContext } from '../context/AuthContext';
-import { addToCart } from '../services/AddToCart';
+import axios from '../../services/axiosConfig';
+import { AuthContext } from '../../context/AuthContext';
+import { addToCart } from '../../services/cartService';
 
 const ProductDetail = () => {
   const { id } = useParams();

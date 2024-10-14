@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useContext } from "react";
-import axios from '../services/axiosConfig';
+import axios from '../../services/axiosConfig';
 import { Link } from 'react-router-dom';
-import { AuthContext } from '../context/AuthContext';
-import { addToCart } from '../services/AddToCart';
+import { AuthContext } from '../../context/AuthContext';
+import { addToCart } from '../../services/cartService';
 
 import "./ProductList.css";
 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from '../services/axiosConfig';
+import axios from '../../services/axiosConfig';
 import { useNavigate, Link } from 'react-router-dom';
 
 const Signup = () => {
