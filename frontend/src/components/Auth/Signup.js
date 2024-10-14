@@ -3,6 +3,8 @@ import axios from '../../services/axiosConfig';
 import { useNavigate, Link } from 'react-router-dom';
 import Button from '../Common/Button'
 
+import styles from "./Auth.module.css";
+
 const Signup = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -23,11 +25,11 @@ const Signup = () => {
   };
 
   return (
-    <div className="form-container">
-      <h2 className="sign-title">サインアップ</h2>
+    <div className={styles.formContainer}>
+      <h2 className={styles.signTitle}>サインアップ</h2>
       {error && <p>{error}</p>}
-      <form onSubmit={handleSignup} className="sign-form">
-        <div className="input-item">
+      <form onSubmit={handleSignup} className={styles.signForm}>
+        <div className={styles.inputItem}>
           <input 
             type="text" 
             value={username} 
@@ -36,7 +38,7 @@ const Signup = () => {
             required 
           />
         </div>
-        <div className="input-item">
+        <div className={styles.inputItem}>
           <input 
             type="password" 
             value={password} 

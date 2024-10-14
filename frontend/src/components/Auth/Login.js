@@ -4,6 +4,8 @@ import { useNavigate, Link } from "react-router-dom";
 import { AuthContext } from '../../context/AuthContext';
 import Button from '../Common/Button'
 
+import styles from "./Auth.module.css";
+
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -31,11 +33,11 @@ const Login = () => {
   };
 
   return (
-    <div className="form-container">
-      <h2 className="sign-title">ログイン</h2>
+    <div className={styles.formContainer}>
+      <h2 className={styles.signTitle}>ログイン</h2>
       {error && <p>{error}</p>}
-      <form onSubmit={handleLogin} className="sign-form">
-        <div className="input-item">
+      <form onSubmit={handleLogin} className={styles.signForm}>
+        <div className={styles.inputItem}>
           <input 
             type="text" 
             value={username} 
@@ -44,7 +46,7 @@ const Login = () => {
             required 
           />
         </div>
-        <div className="input-item">
+        <div className={styles.inputItem}>
           <input 
             type="password" 
             value={password} 
