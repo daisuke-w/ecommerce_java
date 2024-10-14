@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import axios from '../../services/axiosConfig';
 import { AuthContext } from '../../context/AuthContext';
 import { addToCart } from '../../services/cartService';
+import Button from '../Common/Button'
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -30,9 +31,9 @@ const ProductDetail = () => {
       <p>価格: {product.price}円</p>
       <p>在庫: {product.stock}</p>
       {auth && (
-        <button onClick={() => addToCart(product.id)} className="add-to-cart-button">
+        <Button onClick={() => addToCart(product.id)} className="addToCartButton">
           カートへ追加
-        </button>
+        </Button>
       )}
     </div>
   );

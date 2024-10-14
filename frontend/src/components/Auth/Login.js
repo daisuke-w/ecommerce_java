@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import axios from '../../services/axiosConfig';
 import { useNavigate, Link } from "react-router-dom";
 import { AuthContext } from '../../context/AuthContext';
+import Button from '../Common/Button'
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -52,7 +53,7 @@ const Login = () => {
             required 
           />
         </div>
-        <button type="submit" className="submit-button">ログイン</button>
+        <Button type="submit" className="submitButton">ログイン</Button>
       </form>
       <p>アカウントをお持ちでない場合は<Link to="/signup">こちら</Link></p>
     </div>

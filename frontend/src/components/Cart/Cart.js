@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from '../../services/axiosConfig';
+import Button from '../Common/Button'
+
 import styles from './Cart.module.css';
 
 const Cart = () => {
@@ -83,7 +85,7 @@ const Cart = () => {
                                         onChange={(e) => handleQuantityChange(item.product.id, parseInt(e.target.value))}
                                     />
                                 </span>
-                                <button onClick={() => handleRemove(item.product.id)} className="delete-button">削除</button>
+                                <Button onClick={() => handleRemove(item.product.id)} className="deleteToCartButton">削除</Button>
                             </div>
                         </li>
                     ))}

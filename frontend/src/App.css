@@ -71,35 +71,6 @@
   box-sizing: border-box;
 }
 
-.submit-button {
-  background-color: #0088ff;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.submit-button:hover {
-  background-color: #004581;
-}
-
-.logout-button {
-  background-color: #ff002f;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-  margin-right: 20px;
-}
-
-.logout-button:hover {
-  background-color: #99011d;
-}
-
 .cart-button {
   margin-right: 20px;
   background-color: #f2f2f2;

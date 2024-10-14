@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from '../../services/axiosConfig';
 import { useNavigate, Link } from 'react-router-dom';
+import Button from '../Common/Button'
 
 const Signup = () => {
   const [username, setUsername] = useState('');
@@ -44,7 +45,7 @@ const Signup = () => {
             required 
           />
         </div>
-        <button type="submit" className="submit-button">サインアップ</button>
+        <Button type="submit" className="submitButton">サインアップ</Button>
       </form>
       <p>ログインページは<Link to="/login">こちら</Link></p>
     </div>

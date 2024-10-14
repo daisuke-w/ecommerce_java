@@ -3,6 +3,7 @@ import axios from '../../services/axiosConfig';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import { addToCart } from '../../services/cartService';
+import Button from '../Common/Button'
 
 import styles from "./ProductList.module.css";
 
@@ -38,9 +39,9 @@ const ProductList = () => {
                       <p>価格: {product.price}円</p>
                       <Link to={`/product/${product.id}`}>詳細を見る</Link>
                       {auth && (
-                        <button onClick={() => addToCart(product.id)} className="add-to-cart-button">
+                        <Button onClick={() => addToCart(product.id)} className="addToCartButton">
                           カートへ追加
-                        </button>
+                        </Button>
                       )}
                   </div>
               ))
