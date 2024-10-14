@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from '../../services/axiosConfig';
-import './Cart.css';
+import styles from './Cart.module.css';
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -63,7 +63,7 @@ const Cart = () => {
   };
 
   return (
-    <div className="cart">
+    <div className={styles.cart}>
         <h2>ショッピングカート</h2>
         {cartItems.length === 0 ? (
             <p>カートに商品がありません</p>
@@ -72,7 +72,7 @@ const Cart = () => {
                 <ul>
                     {cartItems.map(item => (
                         <li key={item.product.id}>
-                            <div className="cart-item">
+                            <div className={styles.cartItem}>
                                 <span>{item.product.name}</span>
                                 <span>価格: ¥{item.product.price}</span>
                                 <span>

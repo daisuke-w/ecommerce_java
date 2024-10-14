@@ -7,7 +7,7 @@ import Cart from './components/Cart/Cart';
 import Login from './components/Auth/Login';
 import Signup from './components/Auth/Signup';
 import ProtectedRoute from './components/Common/ProtectedRoute';
-import Header from './components/Common/Header'; 
+import Header from './components/Common/Header';
 
 function App() {
   return (

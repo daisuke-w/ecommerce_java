@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import { addToCart } from '../../services/cartService';
 
-import "./ProductList.css";
+import styles from "./ProductList.module.css";
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
@@ -28,11 +28,11 @@ const ProductList = () => {
   return (
     <div>
       <h1>商品一覧</h1>
-      {error && <p className="error">{error}</p>}
-      <div className="product-list">
+      {error && <p className={styles.error}>{error}</p>}
+      <div className={styles.productList}>
           {products.length > 0 ? (
               products.map(product => (
-                  <div key={product.id} className="product-item">
+                  <div key={product.id} className={styles.productItem}>
                       <h2>{product.name}</h2>
                       <p>{product.description}</p>
                       <p>価格: {product.price}円</p>
