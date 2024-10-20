@@ -1,5 +1,6 @@
 import axios from "axios";
 
+/** axiosを定義 */
 const instance = axios.create({
   baseURL: 'http://localhost:8080/api'
 });

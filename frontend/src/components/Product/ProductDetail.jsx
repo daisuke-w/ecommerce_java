@@ -10,6 +10,9 @@ const ProductDetail = () => {
   const [product, setProduct] = useState(null);
   const { auth } = useContext(AuthContext);
 
+  /**
+   * 非同期で商品詳細を取得する処理
+   */
   useEffect(() => {
     axios.get(`/products/${id}`)
         .then(response => {

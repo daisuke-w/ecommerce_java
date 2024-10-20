@@ -13,14 +13,17 @@ const Login = () => {
   const navigate = useNavigate();
   const { login } = useContext(AuthContext);
 
+  /** ログイン処理 */
   const handleLogin = async (e) => {
     e.preventDefault();
 
     try {
+      // 非同期でログイン処理呼び出し
       const response = await axios.post('/users/login', { username, password });
       const { token, userId } = response.data;
 
       if (token) {
+        // フロント側ログイン処理呼び出し
         login(token, userId);
         navigate('/');
       } else {

@@ -12,6 +12,9 @@ const ProductList = () => {
   const [error, setError] = useState('');
   const { auth } = useContext(AuthContext);
 
+  /**
+   * 非同期で商品一覧を取得する処理
+   */
   useEffect(() => {
     const fetchProducts = async () => {
     try {
@@ -22,7 +25,7 @@ const ProductList = () => {
       setError('商品を取得できませんでした。');
     }
     };
-  
+
     fetchProducts();
   }, []);
 

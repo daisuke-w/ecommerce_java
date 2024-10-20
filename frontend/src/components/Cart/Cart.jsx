@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
 import axios from '../../services/axiosConfig';
 import Button from '../Common/Button'
+import { AuthContext } from '../../context/AuthContext';
 
 import styles from './Cart.module.css';
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
-  const userId = localStorage.getItem('userId');
+  const { auth } = useContext(AuthContext);
 
+  /** カート内の商品を非同期で取得する処理 */
   useEffect(() => {
-    if (!userId) {
+    if (!auth) {
       console.error('ユーザーがログインしていません');
       return;
     }
@@ -28,11 +30,19 @@ const Cart = () => {
     fetchCartItems();
   }, [userId]);
 
+  /**
+   * カート内の商品の合計金額を算出する処理
+   * @param items 商品
+   */
   const calculateTotal = (items) => {
     const total = items.reduce((acc, item) => acc + item.product.price * item.quantity, 0);
     setTotalPrice(total);
   };
 
+  /**
+   * カート内の商品を削除する処理
+   * @param productId 商品Id
+   */
   const handleRemove = async (productId) => {
     try {
         await axios.delete('/cart/remove', {
@@ -45,6 +55,11 @@ const Cart = () => {
     }
   };
 
+  /**
+   * カート内の商品を更新する処理
+   * @param productId 商品Id
+   * @param newQuantity 商品数
+   */
   const handleQuantityChange = async (productId, newQuantity) => {
     if (newQuantity <= 0) {
         handleRemove(productId);

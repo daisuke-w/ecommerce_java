@@ -11,13 +11,13 @@ const Signup = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
+  /** サインアップ処理 */
   const handleSignup = async (e) => {
     e.preventDefault();
 
     try {
+      // 非同期でサインアップ処理呼び出し
       await axios.post('/users/register', { username, password });
-
-      // サインアップ成功後にログインページに遷移
       navigate('/login');
     } catch (err) {
       setError('サインアップに失敗しました。');

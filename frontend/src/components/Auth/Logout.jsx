@@ -7,7 +7,9 @@ const Logout = () => {
   const { logout } = useContext(AuthContext);
   const navigate = useNavigate();
 
+  /** ログアウト処理 */
   const handleLogout = () => {
+    // フロントエンド側ログアウト処理呼び出し
     logout();
     navigate('/login');
   };
