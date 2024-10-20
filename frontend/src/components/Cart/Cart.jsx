@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import axios from '../../services/axiosConfig';
 import Button from '../Common/Button'
 import { AuthContext } from '../../context/AuthContext';
@@ -28,7 +28,7 @@ const Cart = () => {
     };
 
     fetchCartItems();
-  }, [userId]);
+  }, [auth]);
 
   /**
    * カート内の商品の合計金額を算出する処理
