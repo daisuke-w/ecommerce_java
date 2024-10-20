@@ -2,7 +2,6 @@ package d.com.ecommerce.controller;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -63,10 +62,10 @@ public class UserController {
 			return ResponseEntity.badRequest().body(response);
 		}
 
-		Optional<User> user = userService.getUserByUsername(username);
-		if (user.isPresent() && passwordEncoder.matches(password, user.get().getPassword())) {
-			String token = jwtUtils.generateJwtToken(user.get());
-			Long userId = user.get().getId();
+		User user = userService.getUserByUsername(username);
+		if (passwordEncoder.matches(password, user.getPassword())) {
+			String token = jwtUtils.generateJwtToken(user);
+			Long userId = user.getId();
 			
 			response.put("message", "Login successful");
 			response.put("token", token);
