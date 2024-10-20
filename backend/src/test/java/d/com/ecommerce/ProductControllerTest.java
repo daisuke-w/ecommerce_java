@@ -19,8 +19,10 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import d.com.ecommerce.config.JwtUtils;
 import d.com.ecommerce.controller.ProductController;
 import d.com.ecommerce.entity.Product;
+import d.com.ecommerce.service.CustomUserDetailsService;
 import d.com.ecommerce.service.ProductService;
 
 @WebMvcTest(ProductController.class)
@@ -32,6 +34,12 @@ public class ProductControllerTest {
 	
 	@MockBean
 	private ProductService productService;
+	
+	@MockBean
+    private CustomUserDetailsService userDetailsService;
+
+	@MockBean
+    private JwtUtils jwtUtils;
 	
 	@Autowired
 	private ObjectMapper objectMapper;
