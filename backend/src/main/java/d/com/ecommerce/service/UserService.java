@@ -1,12 +1,11 @@
 package d.com.ecommerce.service;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import d.com.ecommerce.entity.User;
+import d.com.ecommerce.exception.UserNotFoundException;
 import d.com.ecommerce.repository.UserRepository;
 
 @Service
@@ -20,7 +19,7 @@ public class UserService {
 	
 	public User registerUser(String username, String password) {
 		if (userRepository.findByUsername(username).isPresent()) {
-			throw new RuntimeException("Username already taken");
+			throw new UserNotFoundException("Username already taken");
 		}
 		
 		User user = new User();
@@ -31,11 +30,13 @@ public class UserService {
 		return userRepository.save(user);
 	}
 	
-	public Optional<User> getUserByUsername(String username) {
-		return userRepository.findByUsername(username);
+	public User getUserByUsername(String username) {
+		return userRepository.findByUsername(username)
+				.orElseThrow(() -> new UserNotFoundException("User not found"));
 	}
 	
-	public Optional<User> getUserById(Long userId) {
-		return userRepository.findById(userId);
+	public User getUserById(Long userId) {
+		return userRepository.findById(userId)
+				.orElseThrow(() -> new UserNotFoundException("User not found"));
 	}
 }
