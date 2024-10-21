@@ -1,7 +1,10 @@
 import React, { useState, useContext } from "react";
-import axios from '../services/axiosConfig';
+import axios from '../../services/axiosConfig';
 import { useNavigate, Link } from "react-router-dom";
-import { AuthContext } from '../context/AuthContext';
+import { AuthContext } from '../../context/AuthContext';
+import Button from '../Common/Button'
+
+import styles from "./Auth.module.css";
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -10,15 +13,17 @@ const Login = () => {
   const navigate = useNavigate();
   const { login } = useContext(AuthContext);
 
+  /** ログイン処理 */
   const handleLogin = async (e) => {
     e.preventDefault();
 
     try {
+      // 非同期でログイン処理呼び出し
       const response = await axios.post('/users/login', { username, password });
-
       const { token, userId } = response.data;
 
       if (token) {
+        // フロント側ログイン処理呼び出し
         login(token, userId);
         navigate('/');
       } else {
@@ -30,11 +35,11 @@ const Login = () => {
   };
 
   return (
-    <div className="form-container">
-      <h2 className="sign-title">ログイン</h2>
+    <div className={styles.formContainer}>
+      <h2 className={styles.signTitle}>ログイン</h2>
       {error && <p>{error}</p>}
-      <form onSubmit={handleLogin} className="sign-form">
-        <div className="input-item">
+      <form onSubmit={handleLogin} className={styles.signForm}>
+        <div className={styles.inputItem}>
           <input 
             type="text" 
             value={username} 
@@ -43,7 +48,7 @@ const Login = () => {
             required 
           />
         </div>
-        <div className="input-item">
+        <div className={styles.inputItem}>
           <input 
             type="password" 
             value={password} 
@@ -52,7 +57,7 @@ const Login = () => {
             required 
           />
         </div>
-        <button type="submit" className="submit-button">ログイン</button>
+        <Button type="submit" className="submitButton">ログイン</Button>
       </form>
       <p>アカウントをお持ちでない場合は<Link to="/signup">こちら</Link></p>
     </div>

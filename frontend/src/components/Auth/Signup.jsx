@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
-import axios from '../services/axiosConfig';
+import axios from '../../services/axiosConfig';
 import { useNavigate, Link } from 'react-router-dom';
+import Button from '../Common/Button'
+
+import styles from "./Auth.module.css";
 
 const Signup = () => {
   const [username, setUsername] = useState('');
@@ -8,13 +11,13 @@ const Signup = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
+  /** サインアップ処理 */
   const handleSignup = async (e) => {
     e.preventDefault();
 
     try {
+      // 非同期でサインアップ処理呼び出し
       await axios.post('/users/register', { username, password });
-
-      // サインアップ成功後にログインページに遷移
       navigate('/login');
     } catch (err) {
       setError('サインアップに失敗しました。');
@@ -22,11 +25,11 @@ const Signup = () => {
   };
 
   return (
-    <div className="form-container">
-      <h2 className="sign-title">サインアップ</h2>
+    <div className={styles.formContainer}>
+      <h2 className={styles.signTitle}>サインアップ</h2>
       {error && <p>{error}</p>}
-      <form onSubmit={handleSignup} className="sign-form">
-        <div className="input-item">
+      <form onSubmit={handleSignup} className={styles.signForm}>
+        <div className={styles.inputItem}>
           <input 
             type="text" 
             value={username} 
@@ -35,7 +38,7 @@ const Signup = () => {
             required 
           />
         </div>
-        <div className="input-item">
+        <div className={styles.inputItem}>
           <input 
             type="password" 
             value={password} 
@@ -44,7 +47,7 @@ const Signup = () => {
             required 
           />
         </div>
-        <button type="submit" className="submit-button">サインアップ</button>
+        <Button type="submit" className="submitButton">サインアップ</Button>
       </form>
       <p>ログインページは<Link to="/login">こちら</Link></p>
     </div>

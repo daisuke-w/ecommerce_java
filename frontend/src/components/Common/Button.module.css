@@ -1,0 +1,48 @@
+.button {
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.submitButton {
+  background-color: #0088ff;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+}
+
+.submitButton:hover {
+  background-color: #004581;
+}
+
+.logoutButton {
+  background-color: #ff002f;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  margin-right: 20px;
+}
+
+.logoutButton:hover {
+  background-color: #99011d;
+}
+
+.deleteToCartButton {
+  background-color: #ff4d4d;
+  color: white;
+  padding: 5px 10px;
+}
+
+.deleteToCartButton:hover {
+  background-color: #ff0000;
+}
+
+.addToCartButton {
+  background-color: #ff991b;
+  color: white;
+  padding: 5px 10px;
+}
+
+.addToCartButton:hover {
+  background-color: #935810;
+}

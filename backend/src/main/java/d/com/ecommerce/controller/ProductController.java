@@ -18,18 +18,34 @@ import org.springframework.web.bind.annotation.RestController;
 import d.com.ecommerce.entity.Product;
 import d.com.ecommerce.service.ProductService;
 
+/**
+ * 商品情報を管理するエンドポイントを提供する
+ * 商品に関連するCRUD操作（作成、取得、更新、削除）を処理する
+ */
 @RestController
 @RequestMapping("/api/products")
 public class ProductController {
 	
 	@Autowired
 	private ProductService productService;
-	
+
+	/**
+	 * すべての商品を取得する
+	 * 
+	 * @return 商品のリスト
+	 */
 	@GetMapping
 	public List<Product> getAllProducts() {
 		return productService.getAllProducts();
 	}
 	
+	/**
+	 * 指定されたIDの商品を取得する
+	 * 
+	 * @param id 取得したい商品のID
+	 * @return 商品が存在する場合は200 OKレスポンスと商品情報を返し、
+	 *         存在しない場合は404 Not Foundを返す
+	 */
 	@GetMapping("/{id}")
 	public ResponseEntity<Product> getProductById(@PathVariable Long id) {
 		Optional<Product> product = productService.getProductById(id);
@@ -37,20 +53,40 @@ public class ProductController {
 				.orElseGet(() -> ResponseEntity.notFound().build());
 	}
 	
+	/**
+	 * 新しい商品を作成する
+	 * 
+	 * @param product 作成する商品の情報
+	 * @return 201 Createdレスポンスと作成された商品の情報を返す
+	 */
 	@PostMapping
 	public ResponseEntity<Product> createProduct(@RequestBody Product product) {
 		Product createdProduct = productService.createProduct(product);
 		return ResponseEntity.status(HttpStatus.CREATED).body(createdProduct);
 	}
 	
+	/**
+	 * 指定されたIDの商品情報を更新する
+	 * 
+	 * @param id 更新する商品のID
+	 * @param productDetails 更新後の商品情報
+	 * @return 200 OKレスポンスと更新された商品の情報を返す
+	 */
 	@PutMapping("/{id}")
 	public ResponseEntity<Product> updateProduct(@PathVariable Long id, @RequestBody Product productDetails) {
 		return ResponseEntity.ok(productService.updateProduct(id, productDetails));
 	}
 
+	/**
+	 * 指定されたIDの商品を削除する
+	 * 
+	 * @param id 削除する商品のID
+	 * @return 204 No Contentレスポンスを返す
+	 */
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
 		productService.deleteProduct(id);
 		return ResponseEntity.noContent().build();
 	}
 }
+

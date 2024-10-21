@@ -1,13 +1,13 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import ProductList from './components/ProductList';
-import ProductDetail from './components/ProductDetail';
-import Cart from './components/Cart';
-import Login from './components/Login';
-import Signup from './components/Signup';
-import ProtectedRoute from './components/ProtectedRoute';
-import Header from './components/Header'; 
+import ProductList from './components/Product/ProductList';
+import ProductDetail from './components/Product/ProductDetail';
+import Cart from './components/Cart/Cart';
+import Login from './components/Auth/Login';
+import Signup from './components/Auth/Signup';
+import ProtectedRoute from './components/Common/ProtectedRoute';
+import Header from './components/Common/Header';
 
 function App() {
   return (

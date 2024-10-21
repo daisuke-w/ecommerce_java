@@ -1,9 +1,9 @@
-.product-list {
+.productList {
   display: flex;
   flex-wrap: wrap;
 }
 
-.product-item {
+.productItem {
   border: 1px solid #ccc;
   padding: 10px;
   margin: 10px;
@@ -11,12 +11,12 @@
   text-align: left;
 }
 
-.product-item a {
+.productItem a {
   text-decoration: none;
   color: blue;
   display: block;
 }
 
-.product-item a:hover {
+.productItem a:hover {
   text-decoration: underline;
 }

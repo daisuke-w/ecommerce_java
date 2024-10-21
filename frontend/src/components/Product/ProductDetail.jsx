@@ -1,14 +1,18 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useParams } from 'react-router-dom';
-import axios from '../services/axiosConfig';
-import { AuthContext } from '../context/AuthContext';
-import { addToCart } from '../services/AddToCart';
+import axios from '../../services/axiosConfig';
+import { AuthContext } from '../../context/AuthContext';
+import { addToCart } from '../../services/cartService';
+import Button from '../Common/Button'
 
 const ProductDetail = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const { auth } = useContext(AuthContext);
 
+  /**
+   * 非同期で商品詳細を取得する処理
+   */
   useEffect(() => {
     axios.get(`/products/${id}`)
         .then(response => {
@@ -30,9 +34,9 @@ const ProductDetail = () => {
       <p>価格: {product.price}円</p>
       <p>在庫: {product.stock}</p>
       {auth && (
-        <button onClick={() => addToCart(product.id)} className="add-to-cart-button">
+        <Button onClick={() => addToCart(product.id)} className="addToCartButton">
           カートへ追加
-        </button>
+        </Button>
       )}
     </div>
   );

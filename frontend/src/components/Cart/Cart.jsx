@@ -1,14 +1,18 @@
-import React, { useEffect, useState } from "react";
-import axios from '../services/axiosConfig';
-import './Cart.css';
+import React, { useEffect, useState, useContext } from "react";
+import axios from '../../services/axiosConfig';
+import Button from '../Common/Button'
+import { AuthContext } from '../../context/AuthContext';
+
+import styles from './Cart.module.css';
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
-  const userId = localStorage.getItem('userId');
+  const { auth } = useContext(AuthContext);
 
+  /** カート内の商品を非同期で取得する処理 */
   useEffect(() => {
-    if (!userId) {
+    if (!auth) {
       console.error('ユーザーがログインしていません');
       return;
     }
@@ -24,13 +28,21 @@ const Cart = () => {
     };
 
     fetchCartItems();
-  }, [userId]);
+  }, [auth]);
 
+  /**
+   * カート内の商品の合計金額を算出する処理
+   * @param items 商品
+   */
   const calculateTotal = (items) => {
     const total = items.reduce((acc, item) => acc + item.product.price * item.quantity, 0);
     setTotalPrice(total);
   };
 
+  /**
+   * カート内の商品を削除する処理
+   * @param productId 商品Id
+   */
   const handleRemove = async (productId) => {
     try {
         await axios.delete('/cart/remove', {
@@ -43,6 +55,11 @@ const Cart = () => {
     }
   };
 
+  /**
+   * カート内の商品を更新する処理
+   * @param productId 商品Id
+   * @param newQuantity 商品数
+   */
   const handleQuantityChange = async (productId, newQuantity) => {
     if (newQuantity <= 0) {
         handleRemove(productId);
@@ -63,7 +80,7 @@ const Cart = () => {
   };
 
   return (
-    <div className="cart">
+    <div className={styles.cart}>
         <h2>ショッピングカート</h2>
         {cartItems.length === 0 ? (
             <p>カートに商品がありません</p>
@@ -72,7 +89,7 @@ const Cart = () => {
                 <ul>
                     {cartItems.map(item => (
                         <li key={item.product.id}>
-                            <div className="cart-item">
+                            <div className={styles.cartItem}>
                                 <span>{item.product.name}</span>
                                 <span>価格: ¥{item.product.price}</span>
                                 <span>
@@ -83,7 +100,7 @@ const Cart = () => {
                                         onChange={(e) => handleQuantityChange(item.product.id, parseInt(e.target.value))}
                                     />
                                 </span>
-                                <button onClick={() => handleRemove(item.product.id)} className="delete-button">削除</button>
+                                <Button onClick={() => handleRemove(item.product.id)} className="deleteToCartButton">削除</Button>
                             </div>
                         </li>
                     ))}
