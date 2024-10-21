@@ -17,6 +17,10 @@ import d.com.ecommerce.config.JwtUtils;
 import d.com.ecommerce.entity.User;
 import d.com.ecommerce.service.UserService;
 
+/**
+ * ユーザー情報を管理するエンドポイントを提供する
+ * ユーザーに関連するCRUD操作（作成、取得、更新、削除）を処理する
+ */
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
@@ -32,6 +36,11 @@ public class UserController {
 	@Autowired
 	private JwtUtils jwtUtils;
 	
+	/**
+	 * ユーザーを新規登録する
+	 * @param userMap ユーザー名とPW
+	 * @return 登録成功時はレスポンス200を返す
+	 */
 	@PostMapping("/register")
 	public ResponseEntity<String> register(@RequestBody Map<String, String> userMap) {
 		try {
@@ -50,6 +59,11 @@ public class UserController {
 		}
 	}
 
+	/**
+	 * 登録済みのユーザー情報を確認しログインを制御する
+	 * @param userMap ユーザー名とPW
+	 * @return ログイン成功時はレスポンス200とToken、UserIdを返却
+	 */
 	@PostMapping("/login")
 	public ResponseEntity<Map<String, Object>> loginUser(@RequestBody Map<String, String> userMap) {
 
