@@ -8,6 +8,7 @@ import Login from './components/Auth/Login';
 import Signup from './components/Auth/Signup';
 import ProtectedRoute from './components/Common/ProtectedRoute';
 import Header from './components/Common/Header';
+import ProductCreate from './components/Product/ProductCreate';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<ProtectedRoute><ProductList /></ProtectedRoute>} />
+          <Route path="/product" element={<ProtectedRoute><ProductCreate /></ProtectedRoute>} />
           <Route path="/product/:id" element={<ProtectedRoute><ProductDetail /></ProtectedRoute>} />
           <Route path="/cart" element={<ProtectedRoute><Cart /></ProtectedRoute>} />
 
