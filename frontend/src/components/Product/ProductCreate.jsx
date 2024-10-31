@@ -37,7 +37,7 @@ const ProductCreate = () => {
       {success && <p className={styles.success}>商品が正常に登録されました。</p>}
       <form onSubmit={handleSubmit}>
         <div className={styles.formGroup}>
-          <label htmlFor="name">商品名:</label>
+          <label htmlFor="name">商品名</label>
           <input 
             type="text" 
             id="name" 
@@ -47,7 +47,7 @@ const ProductCreate = () => {
           />
         </div>
         <div className={styles.formGroup}>
-          <label htmlFor="description">商品説明:</label>
+          <label htmlFor="description">商品説明</label>
           <textarea 
             id="description" 
             value={description} 
@@ -56,7 +56,7 @@ const ProductCreate = () => {
           />
         </div>
         <div className={styles.formGroup}>
-          <label htmlFor="price">価格:</label>
+          <label htmlFor="price">価格</label>
           <input 
             type="number" 
             id="price" 
@@ -65,7 +65,7 @@ const ProductCreate = () => {
             required 
           />
         </div>
-        <Button type="submit">出品する</Button>
+        <Button type="submit" className="submitButton">出品する</Button>
       </form>
     </div>
   );
