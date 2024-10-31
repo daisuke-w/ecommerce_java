@@ -3,7 +3,7 @@ import axios from '../../services/axiosConfig';
 import { useNavigate } from 'react-router-dom';
 import Button from '../Common/Button';
 
-import styles from "./ProductList.module.css";
+import styles from "./ProductCreate.module.css";
 
 const ProductCreate = () => {
   const [name, setName] = useState('');
