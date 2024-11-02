@@ -42,20 +42,33 @@ public class UserController {
 	 * @return 登録成功時はレスポンス200を返す
 	 */
 	@PostMapping("/register")
-	public ResponseEntity<String> register(@RequestBody Map<String, String> userMap) {
+	public ResponseEntity<Map<String, Object>> register(@RequestBody Map<String, String> userMap) {
+		Map<String, Object> response = new HashMap<>();
 		try {
 			String username = userMap.get("username");
 			String password = userMap.get("password");
 
 			if (username == null || password == null) {
-				return ResponseEntity.badRequest().body("Username and password must be provided");
+				response.put("message", "Username and password must be provided");
+				return ResponseEntity.badRequest().body(response);
 			}
 
 			User user = userService.registerUser(username, password);
 			logger.info("User registered: {}", user.getUsername());
-			return ResponseEntity.ok("User registered successfully");
+			
+			// トークンを生成
+			String token = jwtUtils.generateJwtToken(user);
+			Long userId = user.getId();
+
+			// レスポンスにトークンとユーザーIDを追加
+			response.put("message", "User registered successfully");
+			response.put("token", token);
+			response.put("userId", userId);
+			
+			return ResponseEntity.ok(response);
 		} catch (RuntimeException e) {
-			return ResponseEntity.badRequest().body(e.getMessage());
+			response.put("message", e.getMessage());
+			return ResponseEntity.badRequest().body(response);
 		}
 	}
 

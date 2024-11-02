@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from '../../services/axiosConfig';
 import { useNavigate, Link } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthContext';
 import Button from '../Common/Button'
 
 import styles from "./Auth.module.css";
@@ -9,6 +10,7 @@ const Signup = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const { login } = useContext(AuthContext);
   const navigate = useNavigate();
 
   /** サインアップ処理 */
@@ -17,8 +19,12 @@ const Signup = () => {
 
     try {
       // 非同期でサインアップ処理呼び出し
-      await axios.post('/users/register', { username, password });
-      navigate('/login');
+      const response = await axios.post('/users/register', { username, password });
+      const { token, userId } = response.data;
+      if (token) {
+        login(token, userId);
+        navigate('/');
+      }
     } catch (err) {
       setError('サインアップに失敗しました。');
     }
