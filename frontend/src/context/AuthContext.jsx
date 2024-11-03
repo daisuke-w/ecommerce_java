@@ -43,8 +43,15 @@ export const AuthProvider = ({ children }) => {
     setUserId(null);
   };
 
+  const checkUserId = (otherUserId) => {
+    if (userId === otherUserId) {
+      return true;
+    }
+    return false;
+  };
+
   return (
-    <AuthContext.Provider value={{ auth, loading, userId, login, logout }}>
+    <AuthContext.Provider value={{ auth, loading, userId, login, logout, checkUserId }}>
       {children}
     </AuthContext.Provider>
   );
