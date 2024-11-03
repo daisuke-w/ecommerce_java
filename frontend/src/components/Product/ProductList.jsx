@@ -10,7 +10,7 @@ import styles from "./ProductList.module.css";
 const ProductList = () => {
   const [products, setProducts] = useState([]);
   const [error, setError] = useState('');
-  const { auth } = useContext(AuthContext);
+  const { auth, checkUserId } = useContext(AuthContext);
 
   /**
    * 非同期で商品一覧を取得する処理
@@ -42,9 +42,22 @@ const ProductList = () => {
                       <p>価格: {product.price}円</p>
                       <Link to={`/product/${product.id}`}>詳細を見る</Link>
                       {auth && (
-                        <Button onClick={() => addToCart(product.id)} className="addToCartButton">
-                          カートへ追加
-                        </Button>
+                        <>
+                          {checkUserId(product.user_id) ? (
+                            <>
+                              <Button className="editButton">
+                                編集
+                              </Button>
+                              <Button className="deleteButton">
+                                削除
+                              </Button>
+                            </>
+                          ) : (
+                            <Button onClick={() => addToCart(product.id)} className="addToCartButton">
+                              カートへ追加
+                            </Button>
+                          )}
+                        </>
                       )}
                   </div>
               ))

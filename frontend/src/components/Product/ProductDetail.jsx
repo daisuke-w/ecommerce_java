@@ -8,7 +8,7 @@ import Button from '../Common/Button'
 const ProductDetail = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
-  const { auth } = useContext(AuthContext);
+  const { auth, checkUserId } = useContext(AuthContext);
 
   /**
    * 非同期で商品詳細を取得する処理
@@ -34,9 +34,22 @@ const ProductDetail = () => {
       <p>価格: {product.price}円</p>
       <p>在庫: {product.stock}</p>
       {auth && (
-        <Button onClick={() => addToCart(product.id)} className="addToCartButton">
-          カートへ追加
-        </Button>
+        <>
+          {checkUserId(product.user_id) ? (
+            <>
+              <Button className="editButton">
+                編集
+              </Button>
+              <Button className="deleteButton">
+                削除
+              </Button>
+            </>
+          ) : (
+            <Button onClick={() => addToCart(product.id)} className="addToCartButton">
+              カートへ追加
+            </Button>
+          )}
+        </>
       )}
     </div>
   );
