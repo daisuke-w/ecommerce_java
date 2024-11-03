@@ -9,6 +9,7 @@ const ProductCreate = () => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState('');
+  const [stock, setStock] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
   const navigate = useNavigate();
@@ -20,7 +21,7 @@ const ProductCreate = () => {
     event.preventDefault();
     
     try {
-      const productData = { name, description, price: parseFloat(price) };
+      const productData = { name, description, price: parseFloat(price), stock };
       await axios.post('/products', productData);
       setSuccess(true);
       navigate('/');
@@ -62,6 +63,16 @@ const ProductCreate = () => {
             id="price" 
             value={price} 
             onChange={(e) => setPrice(e.target.value)} 
+            required 
+          />
+        </div>
+        <div className={styles.formGroup}>
+          <label htmlFor="stock">在庫数</label>
+          <input 
+            type="number" 
+            id="stock" 
+            value={stock} 
+            onChange={(e) => setStock(e.target.value)} 
             required 
           />
         </div>
