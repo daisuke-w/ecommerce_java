@@ -1,8 +1,9 @@
 import React, { useEffect, useState, useContext } from "react";
 import axios from '../../services/axiosConfig';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import { addToCart } from '../../services/cartService';
+import { deleteProduct } from '../../services/productService';
 import Button from '../Common/Button'
 
 import styles from "./ProductList.module.css";
@@ -10,7 +11,8 @@ import styles from "./ProductList.module.css";
 const ProductList = () => {
   const [products, setProducts] = useState([]);
   const [error, setError] = useState('');
-  const { auth } = useContext(AuthContext);
+  const { auth, checkUserId } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   /**
    * 非同期で商品一覧を取得する処理
@@ -29,6 +31,16 @@ const ProductList = () => {
     fetchProducts();
   }, []);
 
+  const handleDelete = async (id) => {
+    try {
+      await deleteProduct(id);
+      // 状態を更新してリストから削除
+      setProducts(products.filter(product => product.id !== id));
+    } catch (error) {
+      console.error('Error deleting product:', error);
+    }
+  };
+
   return (
     <div>
       <h1>商品一覧</h1>
@@ -42,9 +54,22 @@ const ProductList = () => {
                       <p>価格: {product.price}円</p>
                       <Link to={`/product/${product.id}`}>詳細を見る</Link>
                       {auth && (
-                        <Button onClick={() => addToCart(product.id)} className="addToCartButton">
-                          カートへ追加
-                        </Button>
+                        <>
+                          {checkUserId(product.user_id) ? (
+                            <>
+                              <Button onClick={() => navigate(`/product/edit/${product.id}`)} className="editButton">
+                                編集
+                              </Button>
+                              <Button onClick={() => handleDelete(product.id)} className="deleteButton">
+                                削除
+                              </Button>
+                            </>
+                          ) : (
+                            <Button onClick={() => addToCart(product.id)} className="addToCartButton">
+                              カートへ追加
+                            </Button>
+                          )}
+                        </>
                       )}
                   </div>
               ))

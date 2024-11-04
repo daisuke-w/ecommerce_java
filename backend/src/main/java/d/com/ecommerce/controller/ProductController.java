@@ -1,5 +1,6 @@
 package d.com.ecommerce.controller;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import d.com.ecommerce.entity.Product;
+import d.com.ecommerce.entity.User;
 import d.com.ecommerce.service.ProductService;
+import d.com.ecommerce.service.UserService;
 
 /**
  * 商品情報を管理するエンドポイントを提供する
@@ -28,6 +31,9 @@ public class ProductController {
 	
 	@Autowired
 	private ProductService productService;
+	
+	@Autowired
+	private UserService userService;
 
 	/**
 	 * すべての商品を取得する
@@ -60,9 +66,12 @@ public class ProductController {
 	 * @return 201 Createdレスポンスと作成された商品の情報を返す
 	 */
 	@PostMapping
-	public ResponseEntity<Product> createProduct(@RequestBody Product product) {
-		Product createdProduct = productService.createProduct(product);
-		return ResponseEntity.status(HttpStatus.CREATED).body(createdProduct);
+	public ResponseEntity<Product> createProduct(@RequestBody Product product, Principal principal) {
+	    String username = principal.getName();
+	    User user = userService.getUserByUsername(username);
+	    product.setUser_id(user.getId());
+	    Product createdProduct = productService.createProduct(product);
+	    return ResponseEntity.status(HttpStatus.CREATED).body(createdProduct);
 	}
 	
 	/**

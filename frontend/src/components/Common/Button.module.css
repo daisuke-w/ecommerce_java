@@ -27,16 +27,6 @@
   background-color: #99011d;
 }
 
-.deleteToCartButton {
-  background-color: #ff4d4d;
-  color: white;
-  padding: 5px 10px;
-}
-
-.deleteToCartButton:hover {
-  background-color: #ff0000;
-}
-
 .addToCartButton {
   background-color: #ff991b;
   color: white;
@@ -45,4 +35,24 @@
 
 .addToCartButton:hover {
   background-color: #935810;
+}
+
+.editButton {
+  background-color: #0088ff;
+  color: white;
+  padding: 5px 10px;
+}
+
+.editButton:hover {
+  background-color: #004581;
+}
+
+.deleteButton {
+  background-color: #ff002f;
+  color: white;
+  padding: 5px 10px;
+}
+
+.deleteButton:hover {
+  background-color: #99011d;
 }

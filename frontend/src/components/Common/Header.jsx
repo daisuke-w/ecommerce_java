@@ -17,6 +17,7 @@ const Header = () => {
         {auth && (
           <>
             <Link to="/cart" className={styles.headerCart}>カート</Link>
+            <Link to="/product" className={styles.newProduct}>出品</Link>
             <Logout />
           </>
         )}
