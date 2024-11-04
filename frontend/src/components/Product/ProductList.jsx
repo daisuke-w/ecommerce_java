@@ -1,8 +1,9 @@
 import React, { useEffect, useState, useContext } from "react";
 import axios from '../../services/axiosConfig';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import { addToCart } from '../../services/cartService';
+import { deleteProduct } from '../../services/productService';
 import Button from '../Common/Button'
 
 import styles from "./ProductList.module.css";
@@ -11,6 +12,7 @@ const ProductList = () => {
   const [products, setProducts] = useState([]);
   const [error, setError] = useState('');
   const { auth, checkUserId } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   /**
    * 非同期で商品一覧を取得する処理
@@ -45,10 +47,10 @@ const ProductList = () => {
                         <>
                           {checkUserId(product.user_id) ? (
                             <>
-                              <Button className="editButton">
+                              <Button onClick={() => navigate(`/product/edit/${product.id}`)} className="editButton">
                                 編集
                               </Button>
-                              <Button className="deleteButton">
+                              <Button onClick={() => deleteProduct(product.id)} className="deleteButton">
                                 削除
                               </Button>
                             </>
