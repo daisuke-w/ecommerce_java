@@ -24,7 +24,7 @@ export const AuthProvider = ({ children }) => {
   /**
    * トークンとUserIdをlocalStorageとStateに設定する処理
    * @param token  ログイン時に生成
-   * @param userId ログインしているユーザーのId
+   * @param userId ログインしているUserId
   */
   const login = (token, userId) => {
     localStorage.setItem('token', token);
@@ -43,6 +43,11 @@ export const AuthProvider = ({ children }) => {
     setUserId(null);
   };
 
+  /**
+   * ログイン中のUserIdと一致するか確認する処理
+   * @param otherUserId 比較対象のUserId
+   * @returns 真偽値
+   */
   const checkUserId = (otherUserId) => {
     if (userId === otherUserId) {
       return true;
