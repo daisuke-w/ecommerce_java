@@ -31,6 +31,16 @@ const ProductList = () => {
     fetchProducts();
   }, []);
 
+  const handleDelete = async (id) => {
+    try {
+      await deleteProduct(id);
+      // 状態を更新してリストから削除
+      setProducts(products.filter(product => product.id !== id));
+    } catch (error) {
+      console.error('Error deleting product:', error);
+    }
+  };
+
   return (
     <div>
       <h1>商品一覧</h1>
@@ -50,7 +60,7 @@ const ProductList = () => {
                               <Button onClick={() => navigate(`/product/edit/${product.id}`)} className="editButton">
                                 編集
                               </Button>
-                              <Button onClick={() => deleteProduct(product.id)} className="deleteButton">
+                              <Button onClick={() => handleDelete(product.id)} className="deleteButton">
                                 削除
                               </Button>
                             </>
