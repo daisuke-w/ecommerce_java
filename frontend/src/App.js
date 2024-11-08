@@ -10,6 +10,7 @@ import ProtectedRoute from './components/common/ProtectedRoute';
 import Header from './components/common/Header';
 import ProductCreate from './components/ecommerce/ProductCreate';
 import ProductEdit from './components/ecommerce/ProductEdit';
+import OrderDetail from './components/ecommerce/OrderDetail';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/product/edit/:id" element={<ProtectedRoute><ProductEdit /></ProtectedRoute>} />
           <Route path="/product/:id" element={<ProtectedRoute><ProductDetail /></ProtectedRoute>} />
           <Route path="/cart" element={<ProtectedRoute><Cart /></ProtectedRoute>} />
+          <Route path="/order/:id" element={<ProtectedRoute><OrderDetail /></ProtectedRoute>} />
 
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
