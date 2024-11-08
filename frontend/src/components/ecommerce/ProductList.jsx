@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import { addToCart } from '../../services/cartService';
 import { deleteProduct } from '../../services/productService';
-import Button from '../Common/Button'
+import Button from '../common/Button'
 
 import styles from "./ProductList.module.css";
 

@@ -4,7 +4,7 @@ import axios from '../../services/axiosConfig';
 import { AuthContext } from '../../context/AuthContext';
 import { addToCart } from '../../services/cartService';
 import { deleteProduct } from '../../services/productService';
-import Button from '../Common/Button'
+import Button from '../common/Button'
 
 const ProductDetail = () => {
   const { id } = useParams();
