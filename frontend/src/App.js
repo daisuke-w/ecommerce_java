@@ -1,15 +1,15 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import ProductList from './components/Product/ProductList';
-import ProductDetail from './components/Product/ProductDetail';
-import Cart from './components/Cart/Cart';
-import Login from './components/Auth/Login';
-import Signup from './components/Auth/Signup';
-import ProtectedRoute from './components/Common/ProtectedRoute';
-import Header from './components/Common/Header';
-import ProductCreate from './components/Product/ProductCreate';
-import ProductEdit from './components/Product/ProductEdit';
+import ProductList from './components/ecommerce/ProductList';
+import ProductDetail from './components/ecommerce/ProductDetail';
+import Cart from './components/ecommerce/Cart';
+import Login from './components/auth/Login';
+import Signup from './components/auth/Signup';
+import ProtectedRoute from './components/common/ProtectedRoute';
+import Header from './components/common/Header';
+import ProductCreate from './components/ecommerce/ProductCreate';
+import ProductEdit from './components/ecommerce/ProductEdit';
 
 function App() {
   return (

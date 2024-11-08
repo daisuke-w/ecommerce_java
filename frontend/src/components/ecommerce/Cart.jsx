@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import axios from '../../services/axiosConfig';
-import Button from '../Common/Button'
+import Button from '../common/Button'
 import { AuthContext } from '../../context/AuthContext';
 
 import styles from './Cart.module.css';

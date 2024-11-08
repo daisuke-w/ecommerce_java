@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Link } from 'react-router-dom';
 import { AuthContext } from "../../context/AuthContext";
-import Logout from "../Auth/Logout";
+import Logout from "../auth/Logout";
 
 import styles from "./Header.module.css";
 
