@@ -13,10 +13,10 @@ const Header = () => {
       <div>
         <h1><Link to="/" className={styles.headerTitle}>ECサイト</Link></h1>
       </div>
-      <div>
+      <div className={styles.headerMenu}>
         {auth && (
           <>
-            <Link to="/cart" className={styles.headerCart}>カート</Link>
+            <Link to="/cart" className={styles.headerCart}></Link>
             <Link to="/product" className={styles.newProduct}>出品</Link>
             <Logout />
           </>

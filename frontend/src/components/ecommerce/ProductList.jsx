@@ -66,7 +66,7 @@ const ProductList = () => {
                             </>
                           ) : (
                             <Button onClick={() => addToCart(product.id)} className="addToCartButton">
-                              カートへ追加
+                              追加
                             </Button>
                           )}
                         </>

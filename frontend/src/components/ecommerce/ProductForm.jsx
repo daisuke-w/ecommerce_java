@@ -54,7 +54,7 @@ const ProductForm = ({ initialData = {}, onSubmit, buttonText }) => {
           required
         />
       </div>
-      <Button type="submit">{buttonText}</Button>
+      <Button type="submit" className="submitButton">{buttonText}</Button>
     </form>
   );
 };

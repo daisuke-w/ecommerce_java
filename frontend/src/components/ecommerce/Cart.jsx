@@ -123,7 +123,7 @@ const Cart = () => {
                     ))}
                 </ul>
                 <h3>合計金額: ¥{totalPrice}</h3>
-                <Button onClick={handleOrderCreate}>注文確定</Button>
+                <Button onClick={handleOrderCreate} className="submitButton">注文確定</Button>
             </div>
         )}
     </div>
