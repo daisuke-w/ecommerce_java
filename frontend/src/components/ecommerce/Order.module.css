@@ -1,0 +1,44 @@
+.orderContainer {
+  padding: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+h1 {
+  text-align: center;
+}
+
+.orderDetailsTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.orderDetailsTable th,
+.orderDetailsTable td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: left;
+  width: 33%;
+}
+
+.orderDetailsTable th {
+  background-color: #f4f4f4;
+}
+
+.orderItemsTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.orderItemsTable th,
+.orderItemsTable td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: left;
+  width: 33%;
+}
+
+.orderItemsTable th {
+  background-color: #f4f4f4;
+}
