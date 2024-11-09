@@ -82,6 +82,9 @@ const Cart = () => {
     }
   };
 
+  /**
+   * 注文作成処理を呼び出す
+   */
   const handleOrderCreate = async () => {
     try {
       const order = await createOrder();
@@ -99,7 +102,7 @@ const Cart = () => {
         {cartItems.length === 0 ? (
             <p>カートに商品がありません</p>
         ) : (
-            <div>
+            <div className={styles.cartList}>
                 <ul>
                     {cartItems.map(item => (
                         <li key={item.product.id}>
@@ -120,7 +123,7 @@ const Cart = () => {
                     ))}
                 </ul>
                 <h3>合計金額: ¥{totalPrice}</h3>
-                <Button onClick={handleOrderCreate}>注文を確定</Button>
+                <Button onClick={handleOrderCreate}>注文確定</Button>
             </div>
         )}
     </div>
