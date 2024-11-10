@@ -1,0 +1,39 @@
+.productList {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.productItem {
+  position: relative;
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 10px;
+  width: 200px;
+  text-align: left;
+}
+
+.productItem a {
+  text-decoration: none;
+  color: blue;
+  display: block;
+}
+
+.soldOut {
+  position: absolute;
+  top: 96px;
+  left: -30px;
+  width: calc(100% + 60px);
+  background-color: red;
+  color: white;
+  padding: 4px 0;
+  font-weight: bold;
+  text-align: center;
+  transform: rotate(45deg);
+  opacity: 0.8;
+  z-index: 1;
+}
+
+.productDetailContainer {
+  display: flex;
+  justify-content: center;
+}
