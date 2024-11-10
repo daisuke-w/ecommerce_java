@@ -37,6 +37,11 @@
   background-color: #935810;
 }
 
+.addToCartButton:disabled {
+  background-color: grey;
+  cursor: not-allowed;
+}
+
 .editButton {
   background-color: #0088ff;
   color: white;
