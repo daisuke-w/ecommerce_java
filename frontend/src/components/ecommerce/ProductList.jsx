@@ -6,7 +6,7 @@ import { addToCart } from '../../services/cartService';
 import { deleteProduct } from '../../services/productService';
 import Button from '../common/Button'
 
-import styles from "./ProductList.module.css";
+import styles from "./Product.module.css";
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
@@ -19,13 +19,13 @@ const ProductList = () => {
    */
   useEffect(() => {
     const fetchProducts = async () => {
-    try {
-      const response = await axios.get('/products');
-      setProducts(response.data);
-    } catch (error) {
-      console.error('Error fetching products:', error);
-      setError('商品を取得できませんでした。');
-    }
+      try {
+        const response = await axios.get('/products');
+        setProducts(response.data);
+      } catch (error) {
+        console.error('Error fetching products:', error);
+        setError('商品を取得できませんでした。');
+      }
     };
 
     fetchProducts();
@@ -49,6 +49,7 @@ const ProductList = () => {
           {products.length > 0 ? (
               products.map(product => (
                   <div key={product.id} className={styles.productItem}>
+                    {product.stock === 0 && <div className={styles.soldOut}>Sold Out</div>}
                       <h2>{product.name}</h2>
                       <p>{product.description}</p>
                       <p>価格: {product.price}円</p>
@@ -65,7 +66,11 @@ const ProductList = () => {
                               </Button>
                             </>
                           ) : (
-                            <Button onClick={() => addToCart(product.id)} className="addToCartButton">
+                            <Button
+                              onClick={() => addToCart(product.id)}
+                              disabled={product.stock === 0}
+                              className="addToCartButton"
+                            >
                               追加
                             </Button>
                           )}
