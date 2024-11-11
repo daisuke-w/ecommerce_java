@@ -25,7 +25,7 @@ const ProductEdit = () => {
     <div>
       <h1>商品を編集</h1>
       {productData && (
-        <ProductForm initialData={productData} onSubmit={handleUpdate} buttonText="更新する" />
+        <ProductForm initialData={productData} onSubmit={handleUpdate} buttonText="更新" />
       )}
     </div>
   );

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Button from '../Common/Button';
+import Button from '../common/Button';
 import styles from './ProductForm.module.css';
 
 const ProductForm = ({ initialData = {}, onSubmit, buttonText }) => {
@@ -54,7 +54,7 @@ const ProductForm = ({ initialData = {}, onSubmit, buttonText }) => {
           required
         />
       </div>
-      <Button type="submit">{buttonText}</Button>
+      <Button type="submit" className="submitButton">{buttonText}</Button>
     </form>
   );
 };

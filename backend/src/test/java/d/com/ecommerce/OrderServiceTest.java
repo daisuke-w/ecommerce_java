@@ -66,7 +66,7 @@ public class OrderServiceTest {
 		given(cartItemRepository.findByUser(user)).willReturn(Arrays.asList(cartItem));
 		given(orderRepository.save(any(CustomerOrder.class))).willAnswer(invocation -> invocation.getArgument(0));
 
-		CustomerOrder customerOrder = orderService.createOrder(Optional.of(user));
+		CustomerOrder customerOrder = orderService.createOrder(user);
 
 		assertNotNull(customerOrder);
 		assertEquals(100.0, customerOrder.getTotalAmount());

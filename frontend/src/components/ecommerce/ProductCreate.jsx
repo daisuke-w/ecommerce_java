@@ -14,7 +14,7 @@ const ProductCreate = () => {
   return (
     <div>
       <h1>商品を出品</h1>
-      <ProductForm onSubmit={handleCreate} buttonText="出品する" />
+      <ProductForm onSubmit={handleCreate} buttonText="出品" />
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
-import Button from '../Common/Button'
+import Button from '../common/Button'
 
 const Logout = () => {
   const { logout } = useContext(AuthContext);

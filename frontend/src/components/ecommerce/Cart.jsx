@@ -1,7 +1,9 @@
 import React, { useEffect, useState, useContext } from "react";
+import { useNavigate } from 'react-router-dom';
 import axios from '../../services/axiosConfig';
-import Button from '../Common/Button'
+import { createOrder } from '../../services/orderService';
 import { AuthContext } from '../../context/AuthContext';
+import Button from '../common/Button'
 
 import styles from './Cart.module.css';
 
@@ -9,6 +11,7 @@ const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const { auth } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   /** カート内の商品を非同期で取得する処理 */
   useEffect(() => {
@@ -79,13 +82,27 @@ const Cart = () => {
     }
   };
 
+  /**
+   * 注文作成処理を呼び出す
+   */
+  const handleOrderCreate = async () => {
+    try {
+      const order = await createOrder();
+      // 注文作成が成功したら、注文詳細ページに遷移する
+      navigate(`/order/${order.id}`);
+    } catch (error) {
+      console.error('注文作成に失敗しました:', error);
+      alert('注文作成に失敗しました');
+    }
+  };
+
   return (
     <div className={styles.cart}>
         <h2>ショッピングカート</h2>
         {cartItems.length === 0 ? (
             <p>カートに商品がありません</p>
         ) : (
-            <div>
+            <div className={styles.cartList}>
                 <ul>
                     {cartItems.map(item => (
                         <li key={item.product.id}>
@@ -106,6 +123,7 @@ const Cart = () => {
                     ))}
                 </ul>
                 <h3>合計金額: ¥{totalPrice}</h3>
+                <Button onClick={handleOrderCreate} className="submitButton">注文確定</Button>
             </div>
         )}
     </div>

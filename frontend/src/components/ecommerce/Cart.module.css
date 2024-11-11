@@ -6,6 +6,15 @@
   border-radius: 8px;
 }
 
+.cartList ul {
+  padding-left: 0;
+  margin: 0 30px;
+}
+
+.cartList li {
+  list-style: none;
+}
+
 .cartItem {
   display: flex;
   justify-content: space-between;
@@ -14,5 +23,6 @@
 }
 
 .cartItem span {
-  margin-right: 15px;
+  flex: 1;
+  text-align: justify;
 }
